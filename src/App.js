@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header';
+import { useEffect, useState } from 'react';
+import { fetchData } from './servises/swDataHandler';
+import CardSwitcher from './components/CardSwitcher';
+import ImageDescription from './components/ImageDescription';
+import { ThemeProvider } from '@mui/material';
+import theme from './components/styles';
+
+const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
 function App() {
+  const [entity, setEntity] = useState('people');
+  const [id, setId] = useState(1);
+  const [items, setItems] = useState({});
+  console.log(items);
+
+  const handleNextId = () => {
+    setId((id) => id + 1);
+  };
+
+  const handlePreviousId = () => {
+    setId((id) => id === 1 ? 1 : id - 1);
+  }
+
+  useEffect(() => {
+    const data = async () => {
+      const res = await fetchData(id, entity);
+      setItems(res);
+    };
+    data();
+  }, [id, entity]);
+
+  const handleSelectEntity = (entity) => {
+    setEntity(entity);
+    setId(1);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <ThemeProvider theme={theme}>
+      <Header entity={entity} onSelectEntity={handleSelectEntity}/>
+      <CardSwitcher
+        handleNextId={handleNextId}
+        handlePreviousId={handlePreviousId}
+      />
+      <ImageDescription
+        entity={entity}
+        items={items}
+        imgUrl={`${imageUrlBase}${entity === 'people'
+          ? 'characters'
+          :  entity}/${id}.jpg`
+      }
+      />
+      </ThemeProvider>
   );
 }
 
