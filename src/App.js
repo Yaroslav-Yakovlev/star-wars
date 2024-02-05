@@ -12,7 +12,6 @@ function App() {
   const [entity, setEntity] = useState('people');
   const [id, setId] = useState(1);
   const [items, setItems] = useState({});
-  console.log(items);
 
   const handleNextId = () => {
     setId((id) => id + 1);

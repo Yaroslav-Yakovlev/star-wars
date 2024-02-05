@@ -7,16 +7,16 @@ const MuiBox = styled(Box)({
   display: 'flex',
   direction: 'row',
   justifyContent: 'space-around',
-  padding: '20px',
+  padding: '16px',
 });
 
-const MuiButton = styled(Button)(({theme}) => ({
-  padding: '18px',
+const MuiButton = styled(Button)(({ theme }) => ({
+  padding: '16px',
   color: theme.palette.primary.main,
   '& .MuiSvgIcon-root': {
     fontSize: '2rem',
   },
-}))
+}));
 
 const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
 
@@ -33,13 +33,25 @@ const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
 
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
-    }
-  }, [handleNextId, handlePreviousId])
+    };
+  }, [handleNextId, handlePreviousId]);
 
   return (
-    <MuiBox spacing={2}>
-      <MuiButton title='Previous' onClick={handlePreviousId}><ArrowBackIosIcon/></MuiButton>
-      <MuiButton title='Next' onClick={handleNextId}><ArrowForwardIosIcon/></MuiButton>
+    <MuiBox>
+      <MuiButton
+        aria-label="Go to the previous item"
+        title="Previous"
+        onClick={handlePreviousId}
+      >
+        <ArrowBackIosIcon/>
+      </MuiButton>
+      <MuiButton
+        aria-label="Go to the next item"
+        title="Next"
+        onClick={handleNextId}
+      >
+        <ArrowForwardIosIcon/>
+      </MuiButton>
     </MuiBox>
   );
 };

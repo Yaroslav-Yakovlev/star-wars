@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import {
   AppBar, Box,
-  Button,
-  Divider,
   IconButton,
-  Stack, Tab, Tabs,
+  Tab, Tabs,
   Toolbar,
 } from '@mui/material';
 import Logo from '../Logo';
