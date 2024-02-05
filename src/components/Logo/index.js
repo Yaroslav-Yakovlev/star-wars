@@ -1,14 +1,15 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, CardMedia } from '@mui/material';
 
 const Logo = () => {
   return (
     <Box sx={{padding: '10px'}} >
-      <img
-        src="https://img.icons8.com/ios-filled/50/baby-yoda.png"
-        alt="baby-yoda"
+      <CardMedia
+        component="img"
+        image={"https://img.icons8.com/ios-filled/50/baby-yoda.png"}
+        alt={'img.icons'}
       />
-    </Box>
+     </Box>
   );
 };
 
