@@ -7,13 +7,14 @@ import {
   ListItemText, Paper, Stack,
   Typography,
 } from '@mui/material';
+import fallBackImage from '../../images/r2d2.png';
 
 const ImageDescription = ({ items, imgUrl, entity }) => {
   const { name, ...otherItems } = items;
 
   return (
     <Paper
-      sx={{ padding: '32px', width: '80%', height: '100%', margin: 'auto' }}
+      sx={{ padding: '32px', width: '85%', margin: 'auto' }}
       variant="elevation"
       elevation={5}
     >
@@ -24,6 +25,7 @@ const ImageDescription = ({ items, imgUrl, entity }) => {
             component="img"
             image={imgUrl}
             alt={entity}
+            onError={(e) => { e.target.src = fallBackImage }}
           />
         </Card>
         <Box>

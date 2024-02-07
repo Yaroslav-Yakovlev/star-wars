@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box, Button, styled } from '@mui/material';
@@ -19,6 +19,7 @@ const MuiButton = styled(Button)(({ theme }) => ({
 }));
 
 const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
+  const boxRef = useRef(null);
 
   const handleKeyPress = (event) => {
     if (event.key === 'ArrowLeft') {
@@ -26,10 +27,14 @@ const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
     } else if (event.key === 'ArrowRight') {
       handleNextId();
     }
+
+    event.stopPropagation();
   };
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
+
+    boxRef.current.focus();
 
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
@@ -48,7 +53,9 @@ const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
       <MuiButton
         aria-label="Go to the next item"
         title="Next"
+        ref={boxRef}
         onClick={handleNextId}
+        disableFocusRipple
       >
         <ArrowForwardIosIcon/>
       </MuiButton>
