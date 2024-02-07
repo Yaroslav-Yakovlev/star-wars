@@ -3,15 +3,17 @@ import { useEffect, useState } from 'react';
 import { fetchData } from './servises/swDataHandler';
 import CardSwitcher from './components/CardSwitcher';
 import ImageDescription from './components/ImageDescription';
-import { ThemeProvider } from '@mui/material';
+import { Box, ThemeProvider } from '@mui/material';
 import theme from './components/styles';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
-function App() {
+function App () {
   const [entity, setEntity] = useState('people');
   const [id, setId] = useState(1);
   const [items, setItems] = useState({});
+  const [isLoad, setIsLoad] = useState(true);
 
   const handleNextId = () => {
     setId((id) => id + 1);
@@ -19,13 +21,15 @@ function App() {
 
   const handlePreviousId = () => {
     setId((id) => id === 1 ? 1 : id - 1);
-  }
+  };
 
   useEffect(() => {
     const data = async () => {
       const res = await fetchData(id, entity);
       setItems(res);
     };
+
+    setIsLoad(false);
     data();
   }, [id, entity]);
 
@@ -35,21 +39,28 @@ function App() {
   };
 
   return (
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <Header entity={entity} onSelectEntity={handleSelectEntity}/>
       <CardSwitcher
         handleNextId={handleNextId}
         handlePreviousId={handlePreviousId}
       />
-      <ImageDescription
-        entity={entity}
-        items={items}
-        imgUrl={`${imageUrlBase}${entity === 'people'
-          ? 'characters'
-          :  entity}/${id}.jpg`
+      {isLoad
+        ? (
+          <Box sx={{ width: '70%', margin: 'auto' }}>
+            <LinearProgress color="primary" variant="indeterminate"/>
+          </Box>
+        ) : (<ImageDescription
+            entity={entity}
+            items={items}
+            imgUrl={`${imageUrlBase}${entity === 'people'
+              ? 'characters'
+              : entity}/${id}.jpg`
+            }
+          />
+        )
       }
-      />
-      </ThemeProvider>
+    </ThemeProvider>
   );
 }
 
