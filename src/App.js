@@ -6,6 +6,7 @@ import ImageDescription from './components/ImageDescription';
 import { Box, ThemeProvider } from '@mui/material';
 import theme from './components/styles';
 import LinearProgress from '@mui/material/LinearProgress';
+import Footer from './components/Footer';
 
 const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
@@ -60,6 +61,7 @@ function App () {
           />
         )
       }
+      <Footer/>
     </ThemeProvider>
   );
 }
