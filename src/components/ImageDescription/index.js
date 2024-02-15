@@ -13,15 +13,20 @@ const ImageDescription = ({ items, imgUrl, entity }) => {
   const { name, ...otherItems } = items;
 
   return (
+    <Box sx={{ paddingBottom: '100px' }}>
     <Paper
-      sx={{ padding: '32px', width: '85%', margin: 'auto' }}
+      sx={{ padding: '32px', width: '75%', margin: 'auto'}}
       variant="elevation"
       elevation={5}
+      style={{ marginBottom: '20px' }}
     >
       <Stack direction="row" spacing={2}>
         <Card>
           <CardMedia
-            sx={{ height: '100%' }}
+            sx={{
+              width: '100%',
+              height: '100%',
+            }}
             component="img"
             image={imgUrl}
             alt={entity}
@@ -48,6 +53,7 @@ const ImageDescription = ({ items, imgUrl, entity }) => {
         </Box>
       </Stack>
     </Paper>
+    </Box>
   );
 };
 

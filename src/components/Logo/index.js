@@ -3,11 +3,11 @@ import { Box, CardMedia } from '@mui/material';
 
 const Logo = () => {
   return (
-    <Box sx={{padding: '10px'}} >
+    <Box>
       <CardMedia
-        component="img"
-        image={"https://img.icons8.com/ios-filled/50/baby-yoda.png"}
-        alt={'img.icons'}
+         component="img"
+         image={"https://img.icons8.com/ios/100/star-wars.png"}
+         alt={'img.icons'}
       />
      </Box>
   );
