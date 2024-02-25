@@ -7,6 +7,8 @@ import { Box, ThemeProvider } from '@mui/material';
 import theme from './components/styles';
 import LinearProgress from '@mui/material/LinearProgress';
 import Footer from './components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPersonById } from './store/entitySlice';
 
 const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
@@ -16,12 +18,20 @@ function App () {
   const [items, setItems] = useState({});
   const [isLoad, setIsLoad] = useState(true);
 
+  // const dispatch = useDispatch();
+  // const { entity, isLoading, id } = useSelector(state => state.person)
+  // console.log(entity);
+  //
+  // useEffect(() => {
+  //  dispatch(fetchPersonById(id));
+  // }, [dispatch, id]);
+
   const handleNextId = () => {
-    setId((id) => id + 1);
+    setId((id) => id + 1);  // action
   };
 
   const handlePreviousId = () => {
-    setId((id) => id === 1 ? 1 : id - 1);
+    setId((id) => id === 1 ? 1 : id - 1);  // action
   };
 
   useEffect(() => {
@@ -36,7 +46,7 @@ function App () {
 
   const handleSelectEntity = (entity) => {
     setEntity(entity);
-    setId(1);
+    setId(1);  // action
   };
 
   return (
