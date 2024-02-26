@@ -3,45 +3,65 @@ import axios from 'axios';
 
 const baseURL = 'https://swapi.dev/api/';
 
-export const fetchPersonById = createAsyncThunk(
-  'people/fetchById',
-  async (id) => {
-    const { data } = await axios.get(`${baseURL}people/${id}`);
-    return {
-      name: data.name,
-      'Gender': data.gender,
-      'Birth year': data.birth_year,
-      'Eye color': data.eye_color,
-      'Mass': data.mass,
-      'Height': data.height,
-    };
-  }
-)
+export const fetchEntityById = createAsyncThunk(
+  'entities/fetchById',
+  async ({ entity, id }) => {
+    const { data } = await axios.get(`${baseURL}${entity}/${id}`);
+    if (entity === 'people') {
+      return {
+        name: data.name,
+        'Gender': data.gender,
+        'Birth year': data.birth_year,
+        'Eye color': data.eye_color,
+        'Mass': data.mass,
+        'Height': data.height,
+      };
+    } else if (entity === 'planets') {
+      return {
+        name: data.name,
+        'Population': data.population,
+        'Orbital period': data.orbital_period,
+        'Diameter': data.diameter,
+        'Climate': data.climate,
+        'Terrain': data.terrain,
+      };
+    } else if (entity === 'starships' || entity === 'vehicles') {
+      return {
+        name: data.name,
+        'Model': data.model,
+        'Passengers': data.passengers,
+        'Cargo capacity': data.cargo_capacity,
+        'Manufacturer': data.manufacturer,
+        'Cost in credits': data.cost_in_credits,
+      };
+    } else {
+      return { name: 'not available' };
+    }
+  },
+);
 
 const initialState = {
-  entity: [],
+  data: {},
   isLoading: true,
-  id: 1,
 };
 
 const entitySlice = createSlice({
-  name: 'person',
+  name: 'entities',
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPersonById.pending, (state) => {
+      .addCase(fetchEntityById.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchPersonById.fulfilled, (state, action) => {
-        console.log(action)
-        state.entity = action.payload;
+      .addCase(fetchEntityById.fulfilled, (state, action) => {
+        state.data = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchPersonById.rejected, (state) => {
+      .addCase(fetchEntityById.rejected, (state) => {
         state.isLoading = false;
-        state.entity = { name: 'not available' }
-      })
+        state.data = { name: 'not available' };
+      });
   },
 });
 

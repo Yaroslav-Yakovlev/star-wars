@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import fallBackImage from '../../images/r2d2.png';
 
-const ImageDescription = ({ items, imgUrl, entity }) => {
+const ImageDescription = ({ items, imgUrl, selectEntity }) => {
   const { name, ...otherItems } = items;
 
   return (
@@ -29,7 +29,7 @@ const ImageDescription = ({ items, imgUrl, entity }) => {
             }}
             component="img"
             image={imgUrl}
-            alt={entity}
+            alt={selectEntity}
             onError={(e) => { e.target.src = fallBackImage }}
           />
         </Card>
