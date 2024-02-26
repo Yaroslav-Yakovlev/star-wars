@@ -8,65 +8,66 @@ import theme from './components/styles';
 import LinearProgress from '@mui/material/LinearProgress';
 import Footer from './components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPersonById } from './store/entitySlice';
+import { fetchEntityById } from './store/entitySlice';
 
 const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
 function App () {
-  const [entity, setEntity] = useState('people');
+  const [selectEntity, setSelectEntity] = useState('people');
   const [id, setId] = useState(1);
   const [items, setItems] = useState({});
   const [isLoad, setIsLoad] = useState(true);
 
   // const dispatch = useDispatch();
-  // const { entity, isLoading, id } = useSelector(state => state.person)
-  // console.log(entity);
+  // const { data, isLoading, } = useSelector(state => state.entities);
+  // console.log('data', data);
   //
   // useEffect(() => {
-  //  dispatch(fetchPersonById(id));
-  // }, [dispatch, id]);
+  //  dispatch(fetchEntityById({ entity: selectEntity, id, }));
+  // }, [dispatch, selectEntity, id]);
 
   const handleNextId = () => {
-    setId((id) => id + 1);  // action
+    setId((id) => id + 1);
   };
 
   const handlePreviousId = () => {
-    setId((id) => id === 1 ? 1 : id - 1);  // action
+    setId((id) => id === 1 ? 1 : id - 1);
   };
 
   useEffect(() => {
     const data = async () => {
-      const res = await fetchData(id, entity);
+      const res = await fetchData(id, selectEntity);
       setItems(res);
     };
 
     setIsLoad(false);
     data();
-  }, [id, entity]);
+  }, [id, selectEntity]);
 
   const handleSelectEntity = (entity) => {
-    setEntity(entity);
-    setId(1);  // action
+    setSelectEntity(entity);
+    setId(1);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Header entity={entity} onSelectEntity={handleSelectEntity}/>
+      <Header entity={selectEntity} onSelectEntity={handleSelectEntity}/>
       <CardSwitcher
         handleNextId={handleNextId}
         handlePreviousId={handlePreviousId}
       />
+
       {isLoad
         ? (
-          <Box sx={{ width: '70%', margin: 'auto' }}>
+          <Box sx={{ width: '70%', margin: 'auto', height: '100px' }}>
             <LinearProgress color="primary" variant="indeterminate"/>
           </Box>
         ) : (<ImageDescription
-            entity={entity}
+            selectEntity={selectEntity}
             items={items}
-            imgUrl={`${imageUrlBase}${entity === 'people'
+            imgUrl={`${imageUrlBase}${selectEntity === 'people'
               ? 'characters'
-              : entity}/${id}.jpg`
+              : selectEntity}/${id}.jpg`
             }
           />
         )

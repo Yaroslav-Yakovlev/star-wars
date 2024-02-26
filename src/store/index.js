@@ -3,7 +3,7 @@ import entitySlice from './entitySlice';
 
 const store = configureStore({
   reducer: {
-    person: entitySlice,
+    entities: entitySlice,
   }
 });
 
