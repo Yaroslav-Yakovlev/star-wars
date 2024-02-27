@@ -8,9 +8,11 @@ import {
   Typography,
 } from '@mui/material';
 import fallBackImage from '../../images/r2d2.png';
+import { useSelector } from 'react-redux';
 
-const ImageDescription = ({ items, imgUrl, selectEntity }) => {
-  const { name, ...otherItems } = items;
+const ImageDescription = ({ imgUrl, selectEntity }) => {
+  const { data } = useSelector(state => state.entities);
+  const { name, ...otherData } = data;
 
   return (
     <Box sx={{ paddingBottom: '100px' }}>
@@ -37,7 +39,7 @@ const ImageDescription = ({ items, imgUrl, selectEntity }) => {
           <Typography marginLeft={1.5} variant="h4">{name}</Typography>
           <Divider/>
           <List>
-            {Object.entries(otherItems).map(([key, value]) => {
+            {Object.entries(otherData).map(([key, value]) => {
               return (
                 <ListItem key={key}>
                   <ListItemText
