@@ -9,17 +9,15 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 const Footer = () => {
 
   return (
-    <>
       <Box
         component="footer"
         sx={{
           backgroundColor: '#f0f0f0',
-          padding: '10px',
+          padding: '20px',
           textAlign: 'center',
           position: 'relative',
-          bottom: '-70px',
+          marginTop: '50px',
           left: 0,
-          width: '100%',
         }}
       >
         <Grid
@@ -118,7 +116,6 @@ const Footer = () => {
           </Typography>
         </Box>
       </Box>
-    </>
   );
 };
 

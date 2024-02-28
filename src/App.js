@@ -2,12 +2,12 @@ import Header from './components/Header';
 import { useEffect, useState } from 'react';
 import CardSwitcher from './components/CardSwitcher';
 import ImageDescription from './components/ImageDescription';
-import { Box, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import theme from './components/styles';
-import LinearProgress from '@mui/material/LinearProgress';
 import Footer from './components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEntityById } from './store/entitySlice';
+import Loader from './components/Loader';
 
 const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
@@ -37,27 +37,19 @@ function App () {
 
   return (
     <ThemeProvider theme={theme}>
+      { isLoading && <Loader/> }
       <Header onSelectEntity={handleSelectEntity}/>
       <CardSwitcher
         handleNextId={handleNextId}
         handlePreviousId={handlePreviousId}
       />
-
-      {isLoading
-        ? (
-          <Box sx={{ width: '70%', margin: 'auto', height: '100px' }}>
-            <LinearProgress color="primary" variant="indeterminate"/>
-          </Box>
-        ) : (
-          <ImageDescription
-            selectEntity={selectEntity}
-            imgUrl={`${imageUrlBase}${selectEntity === 'people'
-              ? 'characters'
-              : selectEntity}/${id}.jpg`
-            }
-          />
-        )
-      }
+      <ImageDescription
+        selectEntity={selectEntity}
+        imgUrl={`${imageUrlBase}${selectEntity === 'people'
+          ? 'characters'
+          : selectEntity}/${id}.jpg`
+        }
+      />
       <Footer/>
     </ThemeProvider>
   );
