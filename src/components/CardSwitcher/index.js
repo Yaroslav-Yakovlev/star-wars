@@ -1,22 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Box, Button, styled } from '@mui/material';
-
-const MuiBox = styled(Box)({
-  display: 'flex',
-  direction: 'row',
-  justifyContent: 'space-around',
-  padding: '16px',
-});
-
-const MuiButton = styled(Button)(({ theme }) => ({
-  padding: '16px',
-  color: theme.palette.primary.main,
-  '& .MuiSvgIcon-root': {
-    fontSize: '2rem',
-  },
-}));
+import { MuiBox, MuiButton } from './styledComponents';
 
 const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
   const boxRef = useRef(null);

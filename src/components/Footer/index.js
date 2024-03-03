@@ -5,20 +5,14 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import { StyledFooter, StyledIcons } from './styledComponents';
+import theme from '../styles';
 
 const Footer = () => {
 
   return (
-      <Box
+      <StyledFooter
         component="footer"
-        sx={{
-          backgroundColor: '#f0f0f0',
-          padding: '20px',
-          textAlign: 'center',
-          position: 'relative',
-          marginTop: '50px',
-          left: 0,
-        }}
       >
         <Grid
           container
@@ -48,7 +42,7 @@ const Footer = () => {
           </Grid>
           <Grid item xs={12} sm={6} lg={3}>
             <Box display="flex" flexDirection="column">
-              <Typography variant="h6" align="left">
+              <Typography variant="h6" align="left" >
                 About us
               </Typography>
               <Typography variant="caption2" align="left">
@@ -78,44 +72,28 @@ const Footer = () => {
                 Social Media
               </Typography>
               <Box display="flex">
-                <Box sx={{
-                  marginRight: '8px',
-                  padding: '4px',
-                  cursor: 'pointer',
-                }}>
+                <StyledIcons>
                   <InstagramIcon/>
-                </Box>
-                <Box sx={{
-                  marginRight: '8px',
-                  padding: '4px',
-                  cursor: 'pointer',
-                }}>
+                </StyledIcons>
+                <StyledIcons>
                   <TelegramIcon/>
-                </Box>
-                <Box sx={{
-                  marginRight: '8px',
-                  padding: '4px',
-                  cursor: 'pointer',
-                }}>
+                </StyledIcons>
+                <StyledIcons>
                   <YouTubeIcon/>
-                </Box>
-                <Box sx={{
-                  marginRight: '8px',
-                  padding: '4px',
-                  cursor: 'pointer',
-                }}>
+                </StyledIcons>
+                <StyledIcons>
                   <FacebookIcon/>
-                </Box>
+                </StyledIcons>
               </Box>
             </Box>
           </Grid>
         </Grid>
         <Box>
-          <Typography padding="16px" variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} Your Company. All rights reserved.
+          <Typography padding="16px" variant="body2" color={theme.palette.text.dark}>
+            © {new Date().getFullYear()} All rights reserved.
           </Typography>
         </Box>
-      </Box>
+      </StyledFooter>
   );
 };
 

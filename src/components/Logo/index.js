@@ -8,6 +8,7 @@ const Logo = () => {
          component="img"
          image={"https://img.icons8.com/ios/100/star-wars.png"}
          alt={'img.icons'}
+         sx={{ filter: 'invert(0.9)' }}
       />
      </Box>
   );

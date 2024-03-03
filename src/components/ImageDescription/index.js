@@ -9,16 +9,19 @@ import {
 } from '@mui/material';
 import fallBackImage from '../../images/r2d2.png';
 import { useSelector } from 'react-redux';
+import { useTheme } from '@mui/material/styles';
 
 const ImageDescription = ({ imgUrl, selectEntity }) => {
   const { name,  ...otherData} = useSelector(state => state.entities.data);
 
+  const theme = useTheme();
+
   return (
     <Box
-      sx={{ paddingBottom: '100px', width: '100%'}}
+      sx={{ paddingBottom: '100px', width: '100%', backgroundColor: theme.palette.primary.main}}
     >
     <Paper
-      sx={{ padding: '32px', width: '75%', margin: 'auto'}}
+      sx={{ padding: '32px', width: '75%', margin: 'auto', backgroundColor: theme.palette.primary.light }}
       variant="elevation"
       elevation={5}
       style={{ marginBottom: '20px' }}
@@ -36,7 +39,7 @@ const ImageDescription = ({ imgUrl, selectEntity }) => {
             onError={(e) => { e.target.src = fallBackImage }}
           />
         </Card>
-        <Box>
+        <Box sx={{ color: theme.palette.text.light }}>
           <Typography marginLeft={1.5} variant="h4">{name}</Typography>
           <Divider/>
           <List>

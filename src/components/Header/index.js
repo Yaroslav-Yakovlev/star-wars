@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import {
-  AppBar, Box,
+  Box,
   IconButton,
   Tab, Tabs,
   Toolbar,
 } from '@mui/material';
 import Logo from '../Logo';
+import { useTheme } from '@mui/material/styles';
+import { StyledAppBar } from './styledComponents';
 
 const Header = ({ onSelectEntity }) => {
   const [tabValue, setTabValue] = useState(0);
+
+  const theme = useTheme();
 
   const handleTabChange = (event, newTabValue) => {
     setTabValue(newTabValue);
@@ -31,7 +35,7 @@ const Header = ({ onSelectEntity }) => {
   };
 
   return (
-    <AppBar position="static" color="transparent">
+    <StyledAppBar position="static">
       <Toolbar>
         <IconButton aria-label="logo"><Logo/></IconButton>
         <Box sx={{ width: '100%' }}>
@@ -41,6 +45,11 @@ const Header = ({ onSelectEntity }) => {
             centered
             indicatorColor="primary"
             textColor="inherit"
+            sx={{
+              '& .MuiTabs-indicator': {
+                backgroundColor: theme.palette.text.light,
+              },
+            }}
           >
             <Tab label="People"/>
             <Tab label="Planets"/>
@@ -49,7 +58,7 @@ const Header = ({ onSelectEntity }) => {
           </Tabs>
         </Box>
       </Toolbar>
-    </AppBar>
+    </StyledAppBar>
   );
 };
 
