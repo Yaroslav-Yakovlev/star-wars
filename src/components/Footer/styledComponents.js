@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { Grid, styled } from '@mui/material';
 import { Box } from '@mui/material';
 
 export const StyledFooter = styled(Box)(({theme}) => ({
@@ -11,8 +11,25 @@ export const StyledFooter = styled(Box)(({theme}) => ({
   left: 0,
 }));
 
-export const StyledIcons = styled(Box)(({}) => ({
+export const StyledIcons = styled(Box)(({ theme}) => ({
   marginRight: '8px',
   padding: '4px',
   cursor: 'pointer',
-}))
+  color: theme.palette.text.light,
+}));
+
+export const StyledGrid = styled(Grid)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+}));
+
+export const commonGridStyles = {
+  display: 'flex',
+  flexDirection: "column",
+};
+
+export const commonTypographyStyled = {
+  marginBottom: "20px",
+}

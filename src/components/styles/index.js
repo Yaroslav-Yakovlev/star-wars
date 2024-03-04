@@ -16,6 +16,11 @@ const theme = createTheme({
     fontFamily: 'Roboto, sans-serif',
     footer: {
       fontFamily: 'Rajdhani, sans-serif',
+      fontWeight: 600,
+    },
+    h6: {
+      fontWeight: 700,
+      color: '#e0e0e0',
     }
   },
   components: {
