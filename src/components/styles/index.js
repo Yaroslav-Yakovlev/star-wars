@@ -30,6 +30,14 @@ const theme = createTheme({
           backgroundColor: '#e0e0e0',
         }
       }
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#27292D',
+          color: '#e0e0e0',
+        },
+      }
     }
   }
 });

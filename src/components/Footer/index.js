@@ -40,7 +40,7 @@ const Footer = () => {
           <Typography variant="h6" align="left" sx={commonTypographyStyled}>
             About us
           </Typography>
-          <Typography variant="caption2" align="left">
+          <Typography variant="caption2" align="left" sx={{maxWidth: '300px'}}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
             enim
