@@ -10,7 +10,8 @@ const theme = createTheme({
       main: '#A3A3A3',
       dark: '#707276',
       light: '#e0e0e0',
-    }
+    },
+    icon: '#e0e0e0',
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
@@ -37,6 +38,13 @@ const theme = createTheme({
           backgroundColor: '#27292D',
           color: '#e0e0e0',
         },
+      }
+    },
+    MuiIcon: {
+      styleOverrides: {
+        root: {
+          color: '#e0e0e0',
+        }
       }
     }
   }

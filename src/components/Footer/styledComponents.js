@@ -15,7 +15,7 @@ export const StyledIcons = styled(Box)(({ theme}) => ({
   marginRight: '8px',
   padding: '4px',
   cursor: 'pointer',
-  color: theme.palette.text.light,
+  color: theme.palette.icon,
 }));
 
 export const StyledGrid = styled(Grid)(() => ({

@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import Logo from '../Logo';
 import { useTheme } from '@mui/material/styles';
+import ActionsIcons from './ActionsIcons';
 
 const DesktopMenu = ({ onSelectEntity }) => {
   const [tabValue, setTabValue] = useState(0);
@@ -34,7 +35,6 @@ const DesktopMenu = ({ onSelectEntity }) => {
   };
 
   return (
-      <>
       <Toolbar>
         <IconButton aria-label="logo"><Logo/></IconButton>
         <Box sx={{ width: '100%' }}>
@@ -56,8 +56,8 @@ const DesktopMenu = ({ onSelectEntity }) => {
             <Tab label="Vehicles"/>
           </Tabs>
         </Box>
+        <ActionsIcons/>
       </Toolbar>
-      </>
   );
 };
 
