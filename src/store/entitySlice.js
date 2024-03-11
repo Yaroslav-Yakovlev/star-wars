@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const baseURL = 'https://swapi.dev/api/';
+const baseURL = 'https://swapi.py4e.com/api/';
 
 export const fetchEntityById = createAsyncThunk(
   'entities/fetchById',
