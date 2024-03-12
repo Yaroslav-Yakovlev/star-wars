@@ -1,15 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  items: 0,
+  items: [],
 };
 
 const favoriteEntitySlice = createSlice({
   name: 'favorite',
   initialState: initialState,
   reducers: {
-    addItem: (state) => {
-      state.items += 1;
+    addItem: (state, action) => {
+      const { name } = action.payload;
+      const existingItem = state.items.find(item => item.name === name);
+
+      if (!existingItem) {
+        state.items.push(action.payload);
+      }
     },
   },
 });

@@ -15,11 +15,12 @@ import { addItem } from '../../store/favoriteEntitySlice';
 
 const ImageDescription = ({ imgUrl, selectEntity }) => {
   const { name, ...otherData } = useSelector(state => state.entities.data);
+
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const handlerLikeClick = () => {
-    dispatch(addItem());
+    dispatch(addItem({ name, ...otherData }));
   };
 
   return (
@@ -54,7 +55,7 @@ const ImageDescription = ({ imgUrl, selectEntity }) => {
               onError={(e) => { e.target.src = fallBackImage; }}
             />
             <CardActionArea>
-              <ImageListItemBar
+              {name !== 'not available' && <ImageListItemBar
                 sx={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
                 title={name}
                 actionIcon={
@@ -68,6 +69,7 @@ const ImageDescription = ({ imgUrl, selectEntity }) => {
                   </Tooltip>
                 }
               />
+              }
             </CardActionArea>
           </Card>
 

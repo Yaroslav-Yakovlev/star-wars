@@ -11,7 +11,7 @@ import Loader from './components/Loader';
 
 const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
-function App () {
+const App = () => {
   const [selectEntity, setSelectEntity] = useState('people');
   const [id, setId] = useState(1);
 
@@ -37,7 +37,7 @@ function App () {
 
   return (
     <ThemeProvider theme={theme}>
-      { isLoading && <Loader/> }
+      {isLoading && <Loader/>}
       <Header onSelectEntity={handleSelectEntity}/>
       <CardSwitcher
         handleNextId={handleNextId}
@@ -53,6 +53,6 @@ function App () {
       <Footer/>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
