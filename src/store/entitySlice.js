@@ -2,12 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const baseURL = 'https://swapi.py4e.com/api/';
+const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
 export const fetchEntityById = createAsyncThunk(
   'entities/fetchById',
   async ({ entity, id }) => {
     try {
       const { data } = await axios.get(`${baseURL}${entity}/${id}`);
+
+      let imageUrl = `${imageUrlBase}${entity === 'people'
+        ? 'characters'
+        : entity}/${id}.jpg`;
+
       switch (entity) {
         case 'people':
           return {
@@ -17,6 +23,7 @@ export const fetchEntityById = createAsyncThunk(
             'Eye color': data.eye_color,
             'Mass': data.mass,
             'Height': data.height,
+            imageUrl,
           };
         case 'planets':
           return {
@@ -26,6 +33,7 @@ export const fetchEntityById = createAsyncThunk(
             'Diameter': data.diameter,
             'Climate': data.climate,
             'Terrain': data.terrain,
+            imageUrl,
           };
         case 'starships':
         case 'vehicles':
@@ -36,6 +44,7 @@ export const fetchEntityById = createAsyncThunk(
             'Cargo capacity': data.cargo_capacity,
             'Manufacturer': data.manufacturer,
             'Cost in credits': data.cost_in_credits,
+            imageUrl,
           };
       }
     } catch (error) {

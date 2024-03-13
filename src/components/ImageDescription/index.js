@@ -13,14 +13,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { addItem } from '../../store/favoriteEntitySlice';
 
-const ImageDescription = ({ imgUrl, selectEntity }) => {
-  const { name, ...otherData } = useSelector(state => state.entities.data);
+const ImageDescription = ({ selectEntity }) => {
+  const { name, imageUrl, ...otherData } = useSelector(
+    state => state.entities.data);
 
   const theme = useTheme();
   const dispatch = useDispatch();
 
-  const handlerLikeClick = () => {
-    dispatch(addItem({ name, ...otherData }));
+  const isNameAvailable = name !== 'not available';
+
+  const handlerAddToFavoriteClick = () => {
+    dispatch(addItem({ name, imageUrl, ...otherData }));
   };
 
   return (
@@ -50,18 +53,18 @@ const ImageDescription = ({ imgUrl, selectEntity }) => {
                 height: '50vh',
               }}
               component="img"
-              image={imgUrl}
+              image={isNameAvailable ? imageUrl : fallBackImage}
               alt={selectEntity}
-              onError={(e) => { e.target.src = fallBackImage; }}
+              onError={(e) => { e.target.src = fallBackImage;}}
             />
             <CardActionArea>
-              {name !== 'not available' && <ImageListItemBar
+              {isNameAvailable && <ImageListItemBar
                 sx={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
                 title={name}
                 actionIcon={
                   <Tooltip title="Add to favorite">
                     <Box
-                      onClick={handlerLikeClick}
+                      onClick={handlerAddToFavoriteClick}
                       sx={{ color: theme.palette.icon, paddingRight: '10px' }}
                     >
                       <FavoriteIcon/>

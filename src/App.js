@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEntityById } from './store/entitySlice';
 import Loader from './components/Loader';
 
-const imageUrlBase = `https://starwars-visualguide.com//assets/img/`;
 
 const App = () => {
   const [selectEntity, setSelectEntity] = useState('people');
@@ -20,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchEntityById({ entity: selectEntity, id }));
+
   }, [dispatch, selectEntity, id]);
 
   const handleNextId = () => {
@@ -43,13 +43,7 @@ const App = () => {
         handleNextId={handleNextId}
         handlePreviousId={handlePreviousId}
       />
-      <ImageDescription
-        selectEntity={selectEntity}
-        imgUrl={`${imageUrlBase}${selectEntity === 'people'
-          ? 'characters'
-          : selectEntity}/${id}.jpg`
-        }
-      />
+      <ImageDescription selectEntity={selectEntity}/>
       <Footer/>
     </ThemeProvider>
   );
