@@ -1,39 +1,65 @@
 import React from 'react';
-import { Box, Button, Modal, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardMedia, DialogActions, DialogTitle, Divider,
+  Paper, Stack, Dialog,
+  Typography, IconButton, TextField,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useSelector } from 'react-redux';
+import fallBackImage from '../../images/r2d2.png';
 
 const EntityModal = ({ open, onClose }) => {
   const { items } = useSelector(state => state.favorites);
 
   return (
-    <Modal
+    <Dialog
       open={open}
       onClose={onClose}
+      fullWidth
+      maxWidth="md"
     >
-      <Box sx={{
-        position: 'absolute',
-        top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 600, bgcolor: 'background.paper',
-        boxShadow: 24, p: 4 }}
-      >
-        <Typography variant="h6" component="h2" gutterBottom>
-          {items.map(item => <li key={item.name}>
-            {item.name}
-            {item.imageUrl}
-          </li>)
-          }
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          description
-        </Typography>
-        <Button
-          onClick={onClose}
-        >
+      <DialogTitle>Favorite Entities</DialogTitle>
+
+      <TextField id="standard-basic" label='Filter' variant="standard" />
+      {items.map((item) => {
+          return (
+            <Paper
+              key={item.name}
+              variant="elevation"
+              elevation={10}
+              sx={{ padding: '0px', marginTop: '20px' }}
+            >
+              <Stack direction="row">
+                <Card>
+                  <CardMedia
+                    component="img"
+                    image={item.imageUrl}
+                    alt={item.name}
+                    onError={(e) => { e.target.src = fallBackImage;}}
+                    sx={{ width: '150px', height: '150px' }}
+                  />
+                </Card>
+                <Typography>{item.name}</Typography>
+                <Typography variant="body2" gutterBottom>
+                  description
+                </Typography>
+                <IconButton size='large'>
+                  <DeleteIcon sx={{ fontSize: '36px' }}/>
+                </IconButton>
+              </Stack>
+            </Paper>
+          );
+        })}
+      <DialogActions>
+        <Button onClick={onClose} color="error">
           Close
         </Button>
-      </Box>
-    </Modal>
+      </DialogActions>
+    </Dialog>
   );
 };
 
