@@ -16,9 +16,17 @@ const favoriteEntitySlice = createSlice({
         state.items.push(action.payload);
       }
     },
+    removeItem: (state, action) => {
+      state.items = state.items.filter(item => item.name !== action.payload);
+    },
+    filterItems: (state, action) => {
+      state.items = state.items.filter(item =>
+        item.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
+    },
   },
 });
 
-export const { addItem } = favoriteEntitySlice.actions;
+export const { addItem, removeItem, filterItems } = favoriteEntitySlice.actions;
 
 export default favoriteEntitySlice.reducer;
