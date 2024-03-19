@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
+  filteredItems: [],
 };
 
 const favoriteEntitySlice = createSlice({
@@ -14,14 +15,17 @@ const favoriteEntitySlice = createSlice({
 
       if (!existingItem) {
         state.items.push(action.payload);
+        state.filteredItems.push(action.payload);
       }
     },
     removeItem: (state, action) => {
       state.items = state.items.filter(item => item.name !== action.payload);
+      state.filteredItems = state.items.filter(
+        item => item.name !== action.payload);
     },
     filterItems: (state, action) => {
-      state.items = state.items.filter(item =>
-        item.name.toLowerCase().includes(action.payload.toLowerCase())
+      state.filteredItems = state.items.filter(item =>
+        item.name.toLowerCase().includes(action.payload.toLowerCase()),
       );
     },
   },

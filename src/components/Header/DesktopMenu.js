@@ -11,7 +11,6 @@ import ActionsIcons from './ActionsIcons';
 
 const DesktopMenu = ({ onSelectEntity }) => {
   const [tabValue, setTabValue] = useState(0);
-
   const theme = useTheme();
 
   const handleTabChange = (event, newTabValue) => {

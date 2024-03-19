@@ -12,11 +12,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
 import fallBackImage from '../../images/r2d2.png';
 import { filterItems, removeItem } from '../../store/favoriteEntitySlice';
+import { useTheme } from '@mui/material/styles';
 
 const EntityModal = ({ open, onClose }) => {
-  const { items } = useSelector(state => state.favorites);
+  const items = useSelector(state => state.favorites.items);
+  const filteredItems = useSelector(state => state.favorites.filteredItems);
   const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const hasItems = items.length !== 0;
 
@@ -30,14 +33,20 @@ const EntityModal = ({ open, onClose }) => {
     dispatch(filterItems(value));
   };
 
+  const handleCloseFavoritesList = () => {
+    onClose();
+    dispatch(filterItems(''));
+    setInputValue('');
+  };
+
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={handleCloseFavoritesList}
       fullWidth
       maxWidth="md"
     >
-      <DialogTitle>
+      <DialogTitle sx={{ color: theme.palette.text.light }}>
         {hasItems ? 'Favorite Entities' : 'Add Your Favorite Entities'}
       </DialogTitle>
 
@@ -49,7 +58,7 @@ const EntityModal = ({ open, onClose }) => {
         onChange={handleFilterItems}
       />
       }
-      {items.map((item) => {
+      {(filteredItems.length === 0 ? items : filteredItems).map((item) => {
         return (
           <Paper
             key={item.name}
@@ -82,7 +91,7 @@ const EntityModal = ({ open, onClose }) => {
         );
       })}
       <DialogActions>
-        <Button onClick={onClose} color="error">
+        <Button onClick={handleCloseFavoritesList} color="error">
           Close
         </Button>
       </DialogActions>
