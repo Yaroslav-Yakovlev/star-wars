@@ -1,29 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box, Card, CardMedia,
   Divider, ImageListItemBar,
   List,
   ListItem,
   ListItemText, Paper, Stack,
-  Typography, CardActionArea, Tooltip, Snackbar, SnackbarContent, Slide,
+  Typography, CardActionArea, Tooltip,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import fallBackImage from '../../images/r2d2.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { addItem } from '../../store/favoriteEntitySlice';
-import { CheckCircle } from '@mui/icons-material';
+import CustomSnackbar from '../CustomSnackbar';
+import { openSnackbar } from '../CustomSnackbar/snackbarSlice';
 
 const ImageDescription = ({ selectEntity }) => {
-  const [openSnackbar, setOpenSnackbar] = useState({
-    open: false,
-    vertical: 'bottom',
-    horizontal: 'right',
-    Transition: Slide,
-  });
-
-  const { vertical, horizontal, open, Transition } = openSnackbar;
-
   const { name, imageUrl, ...otherData } = useSelector(
     state => state.entities.data);
 
@@ -34,15 +26,11 @@ const ImageDescription = ({ selectEntity }) => {
 
   const handlerAddToFavoriteClick = () => {
     dispatch(addItem({ name, imageUrl, ...otherData }));
-    setOpenSnackbar({ ...openSnackbar, open: true });
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpenSnackbar({ ...openSnackbar, open: false });
+    dispatch(openSnackbar({
+      message: `${name} added to favorite list`,
+      open: true,
+      icon: 'add'
+    }));
   };
 
   return (
@@ -117,20 +105,7 @@ const ImageDescription = ({ selectEntity }) => {
           </Stack>
         </Paper>
       </Box>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleCloseSnackbar}
-        message={`${name} added to favorite list`}
-        key={vertical + horizontal}
-        TransitionComponent={Transition}
-      >
-        <SnackbarContent
-          message={`${name} added to favorite list`}
-          action={<CheckCircle/>}
-        />
-      </Snackbar>
+      <CustomSnackbar/>
     </>
   );
 };
