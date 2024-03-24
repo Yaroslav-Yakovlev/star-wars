@@ -23,7 +23,6 @@ export const fetchEntityById = createAsyncThunk(
             'Eye color': data.eye_color,
             'Mass': data.mass,
             'Height': data.height,
-            entity,
             imageUrl,
           };
         case 'planets':
@@ -34,7 +33,6 @@ export const fetchEntityById = createAsyncThunk(
             'Diameter': data.diameter,
             'Climate': data.climate,
             'Terrain': data.terrain,
-            entity,
             imageUrl,
           };
         case 'starships':
@@ -46,7 +44,6 @@ export const fetchEntityById = createAsyncThunk(
             'Cargo capacity': data.cargo_capacity,
             'Manufacturer': data.manufacturer,
             'Cost in credits': data.cost_in_credits,
-            entity,
             imageUrl,
           };
       }
@@ -60,12 +57,17 @@ export const fetchEntityById = createAsyncThunk(
 const initialState = {
   data: {},
   isLoading: true,
+  entity: ''
 };
 
 const entitySlice = createSlice({
   name: 'entities',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    addEntity: (state, action) => {
+      state.entity = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEntityById.pending, (state) => {
@@ -81,6 +83,8 @@ const entitySlice = createSlice({
       });
   },
 });
+
+export const { addEntity } = entitySlice.actions;
 
 export default entitySlice.reducer;
 

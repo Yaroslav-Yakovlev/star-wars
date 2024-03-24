@@ -16,6 +16,7 @@ import { useTheme } from '@mui/material/styles';
 import CustomSnackbar from '../CustomSnackbar';
 import { openSnackbar } from '../CustomSnackbar/snackbarSlice';
 
+
 const EntityModal = ({ open, onClose }) => {
   const items = useSelector(state => state.favorites.items);
   const filteredItems = useSelector(state => state.favorites.filteredItems);
@@ -54,16 +55,17 @@ const EntityModal = ({ open, onClose }) => {
         fullWidth
         maxWidth="md"
       >
-        <DialogTitle sx={{ color: theme.palette.text.light }}>
+        <DialogTitle sx={{ color: theme.palette.text.light, textAlign: 'center', fontSize: '30px' }}>
           {hasItems ? 'Favorite Entities' : 'Add Your Favorite Entities'}
         </DialogTitle>
 
         {hasItems && <TextField
           id="standard-basic"
-          label="Filter"
+          label="filter items"
           variant="standard"
           value={inputValue}
           onChange={handleFilterItems}
+          autoComplete='off'
         />
         }
         {(filteredItems.length === 0 ? items : filteredItems).map((item) => {
@@ -72,7 +74,7 @@ const EntityModal = ({ open, onClose }) => {
               key={item.name}
               variant="elevation"
               elevation={10}
-              sx={{ padding: '0px', marginTop: '20px' }}
+              sx={{ padding: '0px', marginTop: '20px', backgroundColor: 'grey' }}
             >
               <Stack direction="row">
                 <Card>
@@ -81,7 +83,7 @@ const EntityModal = ({ open, onClose }) => {
                     image={item.imageUrl}
                     alt={item.name}
                     onError={(e) => { e.target.src = fallBackImage;}}
-                    sx={{ width: '150px', height: '150px', padding: '10px' }}
+                    sx={{ width: '150px', height: '150px', }}
                   />
                 </Card>
                 <Typography>{item.name}</Typography>
@@ -99,7 +101,7 @@ const EntityModal = ({ open, onClose }) => {
           );
         })}
         <DialogActions>
-          <Button onClick={handleCloseFavoritesList} color="error">
+          <Button onClick={handleCloseFavoritesList} style={{color: theme.palette.text.light}}>
             Close
           </Button>
         </DialogActions>

@@ -6,9 +6,8 @@ import { ThemeProvider } from '@mui/material';
 import theme from './components/styles';
 import Footer from './components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEntityById } from './store/entitySlice';
+import { fetchEntityById, addEntity } from './store/entitySlice';
 import Loader from './components/Loader';
-
 
 const App = () => {
   const [selectEntity, setSelectEntity] = useState('people');
@@ -19,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchEntityById({ entity: selectEntity, id }));
-
+    dispatch(addEntity(selectEntity));
   }, [dispatch, selectEntity, id]);
 
   const handleNextId = () => {
