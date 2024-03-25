@@ -16,7 +16,6 @@ import { useTheme } from '@mui/material/styles';
 import CustomSnackbar from '../CustomSnackbar';
 import { openSnackbar } from '../CustomSnackbar/snackbarSlice';
 
-
 const EntityModal = ({ open, onClose }) => {
   const items = useSelector(state => state.favorites.items);
   const filteredItems = useSelector(state => state.favorites.filteredItems);
@@ -55,7 +54,11 @@ const EntityModal = ({ open, onClose }) => {
         fullWidth
         maxWidth="md"
       >
-        <DialogTitle sx={{ color: theme.palette.text.light, textAlign: 'center', fontSize: '30px' }}>
+        <DialogTitle sx={{
+          color: theme.palette.text.light,
+          textAlign: 'center',
+          fontSize: '30px',
+        }}>
           {hasItems ? 'Favorite Entities' : 'Add Your Favorite Entities'}
         </DialogTitle>
 
@@ -65,7 +68,8 @@ const EntityModal = ({ open, onClose }) => {
           variant="standard"
           value={inputValue}
           onChange={handleFilterItems}
-          autoComplete='off'
+          autoComplete="off"
+
         />
         }
         {(filteredItems.length === 0 ? items : filteredItems).map((item) => {
@@ -74,34 +78,46 @@ const EntityModal = ({ open, onClose }) => {
               key={item.name}
               variant="elevation"
               elevation={10}
-              sx={{ padding: '0px', marginTop: '20px', backgroundColor: 'grey' }}
+              sx={{
+                padding: '0px',
+                marginTop: '20px',
+                backgroundColor: theme.palette.primary.light,
+              }}
             >
-              <Stack direction="row">
+              <Stack direction="row"
+                     sx={{ display: 'flex', alignItems: 'center' }}>
                 <Card>
                   <CardMedia
                     component="img"
                     image={item.imageUrl}
                     alt={item.name}
                     onError={(e) => { e.target.src = fallBackImage;}}
-                    sx={{ width: '150px', height: '150px', }}
+                    sx={{ width: '150px', height: '150px' }}
                   />
                 </Card>
-                <Typography>{item.name}</Typography>
-                <Typography variant="body2" gutterBottom>
-                  description
-                </Typography>
+                <Box sx={{ display: 'flex', marginLeft: '20px' }}>
+                  <Typography variant="h3" color={theme.palette.text.main}>
+                    {item.name}
+                  </Typography>
+                </Box>
+                <Divider/>
                 <IconButton
+                  sx={{ marginLeft: 'auto' }}
                   size="large"
                   onClick={() => handleRemoveItem(item.name)}
                 >
-                  <DeleteIcon sx={{ fontSize: '36px' }}/>
+                  <DeleteIcon
+                    sx={{ fontSize: '36px', color: theme.palette.text.main }}/>
                 </IconButton>
               </Stack>
             </Paper>
           );
         })}
         <DialogActions>
-          <Button onClick={handleCloseFavoritesList} style={{color: theme.palette.text.light}}>
+          <Button
+            onClick={handleCloseFavoritesList}
+            style={{ color: theme.palette.yellow }}
+          >
             Close
           </Button>
         </DialogActions>

@@ -45,8 +45,8 @@ const ActionsIcons = () => {
               onClick={handleModalOpen}
               sx={{ justifyContent: 'center', color: theme.palette.icon }}
               aria-label="favorite">
-              <Badge badgeContent={items.length} max={20}>
-                <FavoriteIcon/>
+              <Badge badgeContent={items.length} max={20} sx={{ color: theme.palette.yellow }}>
+                <FavoriteIcon sx={{ color: theme.palette.yellow }} />
               </Badge>
             </IconButton>
           </Tooltip>

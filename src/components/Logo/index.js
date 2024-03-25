@@ -1,14 +1,18 @@
 import React from 'react';
 import { Box, CardMedia } from '@mui/material';
+import imageLogo from '../../images/star_wars_logo.png'
 
 const Logo = () => {
   return (
     <Box>
       <CardMedia
          component="img"
-         image={"https://img.icons8.com/ios/100/star-wars.png"}
+         image={imageLogo}
          alt={'img.icons'}
-         sx={{ filter: 'invert(0.9)' }}
+         sx={{
+           width: '100px',
+           height: '100px'
+         }}
       />
      </Box>
   );

@@ -1,17 +1,19 @@
 import { createTheme } from '@mui/material';
+import colors from './colors';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#121418',
-      light: '#27292D',
+      main: colors.primary.main,
+      light: colors.primary.light,
     },
     text: {
-      main: '#A3A3A3',
-      dark: '#707276',
-      light: '#e0e0e0',
+      main: colors.text.main,
+      dark: colors.text.dark,
+      light: colors.text.light,
     },
-    icon: '#e0e0e0',
+    icon: colors.icon,
+    yellow: colors.yellow,
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
@@ -21,22 +23,22 @@ const theme = createTheme({
     },
     h6: {
       fontWeight: 700,
-      color: '#e0e0e0',
+      color: colors.text.light,
     },
   },
   components: {
     MuiDivider: {
       styleOverrides: {
         root: {
-          backgroundColor: '#e0e0e0',
+          backgroundColor: colors.text.light,
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: '#27292D',
-          color: '#e0e0e0',
+          backgroundColor: colors.primary.light,
+          color: colors.text.light,
         },
       },
     },
@@ -50,7 +52,16 @@ const theme = createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          backgroundColor: '#27292D',
+          backgroundColor: colors.primary.main,
+        },
+      },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          '& .MuiLinearProgress-barColorPrimary': {
+            backgroundColor: colors.yellow,
+          },
         },
       },
     },
@@ -65,14 +76,14 @@ const theme = createTheme({
           '& input': {
             color: '#e0e0e0',
           },
+          '& .MuiInput-colorSecondary': {
+            color: colors.yellow,
+          },
           '& .MuiInput-underline:before': {
             borderBottomColor: '#707276',
           },
           '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-            borderBottomColor: '#e0e0e0',
-          },
-          '& .MuiInput-underline.Mui-focused:before': {
-            borderBottomColor: '#e0e0e0',
+            borderBottomColor: colors.yellow,
           },
         },
       },

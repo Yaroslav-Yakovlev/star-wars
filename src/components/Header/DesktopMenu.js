@@ -45,7 +45,7 @@ const DesktopMenu = ({ onSelectEntity }) => {
             textColor="inherit"
             sx={{
               '& .MuiTabs-indicator': {
-                backgroundColor: theme.palette.text.light,
+                backgroundColor: theme.palette.yellow,
               },
             }}
           >
