@@ -45,7 +45,7 @@ const theme = createTheme({
     MuiIcon: {
       styleOverrides: {
         root: {
-          color: '#e0e0e0',
+          color: colors.icon,
         },
       },
     },
@@ -71,19 +71,26 @@ const theme = createTheme({
           width: '80%',
           margin: '0 auto',
           '& .MuiInputLabel-root': {
-            color: '#A3A3A3',
+            color: colors.text.main,
           },
-          '& input': {
-            color: '#e0e0e0',
-          },
-          '& .MuiInput-colorSecondary': {
+          '& .MuiInputLabel-root.Mui-focused': {
             color: colors.yellow,
           },
-          '& .MuiInput-underline:before': {
-            borderBottomColor: '#707276',
-          },
-          '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-            borderBottomColor: colors.yellow,
+          '& .MuiInput-root': {
+            color: colors.yellow,
+            '&:before': {
+              borderColor: colors.text.main,
+              borderWidth: '2px',
+            },
+            '&: after': {
+              borderColor: colors.yellow,
+              borderWidth: '2px',
+            },
+            ':hover:not(.Mui-focused)': {
+              '&:before': {
+                borderColor: colors.text.light,
+              },
+            },
           },
         },
       },

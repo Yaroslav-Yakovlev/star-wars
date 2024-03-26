@@ -113,10 +113,10 @@ const EntityModal = ({ open, onClose }) => {
             </Paper>
           );
         })}
-        <DialogActions>
+        <DialogActions sx={{ justifyContent: 'center' }}>
           <Button
             onClick={handleCloseFavoritesList}
-            style={{ color: theme.palette.yellow }}
+            style={{ color: theme.palette.yellow, padding: '14px', }}
           >
             Close
           </Button>
