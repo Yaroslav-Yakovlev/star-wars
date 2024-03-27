@@ -3,7 +3,7 @@ import { Snackbar, SnackbarContent } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { Slide } from '@mui/material';
-import { closeSnackbar } from './snackbarSlice';
+import { closeSnackbar } from '../../store/snackbarSlice';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 const CustomSnackbar = () => {

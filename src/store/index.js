@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import entitySlice from './entitySlice';
 import favoriteEntitySlice from './favoriteEntitySlice';
-import snackbarSlice from '../components/CustomSnackbar/snackbarSlice';
+import snackbarSlice from './snackbarSlice';
 
 const store = configureStore({
   reducer: {

@@ -14,7 +14,7 @@ import fallBackImage from '../../images/r2d2.png';
 import { filterItems, removeItem } from '../../store/favoriteEntitySlice';
 import { useTheme } from '@mui/material/styles';
 import CustomSnackbar from '../CustomSnackbar';
-import { openSnackbar } from '../CustomSnackbar/snackbarSlice';
+import { openSnackbar } from '../../store/snackbarSlice';
 
 const EntityModal = ({ open, onClose }) => {
   const items = useSelector(state => state.favorites.items);
@@ -116,7 +116,7 @@ const EntityModal = ({ open, onClose }) => {
         <DialogActions sx={{ justifyContent: 'center' }}>
           <Button
             onClick={handleCloseFavoritesList}
-            style={{ color: theme.palette.yellow, padding: '14px', }}
+            style={{ color: theme.palette.yellow, padding: '14px' }}
           >
             Close
           </Button>

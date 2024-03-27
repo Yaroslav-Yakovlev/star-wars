@@ -13,24 +13,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { addItem } from '../../store/favoriteEntitySlice';
 import CustomSnackbar from '../CustomSnackbar';
-import { openSnackbar } from '../CustomSnackbar/snackbarSlice';
+import { openSnackbar } from '../../store/snackbarSlice';
 
 const ImageDescription = ({ selectEntity }) => {
   const { name, imageUrl, ...otherData } = useSelector(
     state => state.entities.data);
+  const favoriteItems = useSelector(
+    state => state.favorites.items.map(obj => obj.name));
 
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const isNameAvailable = name !== 'not available';
 
-  const handlerAddToFavoriteClick = () => {
+  const handlerAddToFavorite = () => {
+    const checkExistFavoriteItem = favoriteItems.some(item => item === name);
+
     dispatch(addItem({ name, imageUrl, ...otherData }));
+
     dispatch(openSnackbar({
-      message: `${name} added to favorite list`,
-      open: true,
-      icon: 'add'
-    }));
+        message: ` ${checkExistFavoriteItem
+          ? `${name} is already in favorite list`
+          : `${name} added to favorite list`
+        }`,
+        open: true,
+        icon: 'add',
+      }),
+    );
   };
 
   return (
@@ -72,7 +81,7 @@ const ImageDescription = ({ selectEntity }) => {
                   actionIcon={
                     <Tooltip title="Add to favorite">
                       <Box
-                        onClick={handlerAddToFavoriteClick}
+                        onClick={handlerAddToFavorite}
                         sx={{ color: theme.palette.icon, paddingRight: '10px' }}
                       >
                         <FavoriteIcon/>

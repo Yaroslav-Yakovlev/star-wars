@@ -54,6 +54,20 @@ const theme = createTheme({
         paper: {
           backgroundColor: colors.primary.main,
         },
+        // '& .MuiDialog-scrollPaper': {
+        //   '&::-webkit-scrollbar': {
+        //     width: '10px',
+        //   },
+        //   '&::-webkit-scrollbar-track': {
+        //     background: colors.yellow,
+        //   },
+        //   '&::-webkit-scrollbar-thumb': {
+        //     background: colors.yellow,
+        //   },
+        //   '&::-webkit-scrollbar-thumb:hover': {
+        //     background: colors.yellow,
+        //   },
+        // }
       },
     },
     MuiLinearProgress: {
