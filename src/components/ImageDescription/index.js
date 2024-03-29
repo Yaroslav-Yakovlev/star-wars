@@ -64,33 +64,42 @@ const ImageDescription = ({ selectEntity }) => {
         >
           <Stack direction="row" spacing={4}>
             <Card>
-              <CardMedia
-                sx={{
-                  maxWidth: '100%',
-                  height: '50vh',
-                }}
-                component="img"
-                image={isNameAvailable ? imageUrl : fallBackImage}
-                alt={selectEntity}
-                onError={(e) => { e.target.src = fallBackImage;}}
-              />
-              <CardActionArea>
-                {isNameAvailable && <ImageListItemBar
-                  sx={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
-                  title={name}
-                  actionIcon={
-                    <Tooltip title="Add to favorite">
+              <Tooltip placement="top-end" title="Add to favorite">
+                <CardActionArea
+                  onClick={handlerAddToFavorite}
+                >
+                  <CardMedia
+                    sx={{
+                      maxWidth: '100%',
+                      height: '50vh',
+                    }}
+                    component="img"
+                    image={isNameAvailable ? imageUrl : fallBackImage}
+                    alt={selectEntity}
+                    onError={(e) => { e.target.src = fallBackImage;}}
+                  />
+                  {isNameAvailable && <ImageListItemBar
+                    sx={{
+                      backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                      '& .MuiSvgIcon-root:hover': {
+                        color: theme.palette.yellow,
+                      }
+                    }}
+                    title={name}
+                    actionIcon={
                       <Box
-                        onClick={handlerAddToFavorite}
-                        sx={{ color: theme.palette.icon, paddingRight: '10px' }}
+                        sx={{
+                          color: theme.palette.icon,
+                          paddingRight: '10px',
+                        }}
                       >
                         <FavoriteIcon/>
                       </Box>
-                    </Tooltip>
+                    }
+                  />
                   }
-                />
-                }
-              </CardActionArea>
+                </CardActionArea>
+              </Tooltip>
             </Card>
 
             <Box sx={{ color: theme.palette.text.light }}>

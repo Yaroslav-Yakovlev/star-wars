@@ -27,6 +27,45 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          '&::-webkit-scrollbar': {
+            width: '10px',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: colors.text.light,
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: colors.text.dark,
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#555',
+          },
+        }
+      }
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: colors.primary.main,
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: colors.text.dark,
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: colors.yellow,
+            borderRadius: '5px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: colors.text.light,
+          },
+        },
+      },
+    },
     MuiDivider: {
       styleOverrides: {
         root: {
@@ -47,27 +86,6 @@ const theme = createTheme({
         root: {
           color: colors.icon,
         },
-      },
-    },
-    MuiDialog: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: colors.primary.main,
-        },
-        // '& .MuiDialog-scrollPaper': {
-        //   '&::-webkit-scrollbar': {
-        //     width: '10px',
-        //   },
-        //   '&::-webkit-scrollbar-track': {
-        //     background: colors.yellow,
-        //   },
-        //   '&::-webkit-scrollbar-thumb': {
-        //     background: colors.yellow,
-        //   },
-        //   '&::-webkit-scrollbar-thumb:hover': {
-        //     background: colors.yellow,
-        //   },
-        // }
       },
     },
     MuiLinearProgress: {

@@ -2,7 +2,7 @@ import Header from './components/Header';
 import { useEffect, useState } from 'react';
 import CardSwitcher from './components/CardSwitcher';
 import ImageDescription from './components/ImageDescription';
-import { ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './components/styles';
 import Footer from './components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,6 +36,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline/>
       {isLoading && <Loader/>}
       <Header onSelectEntity={handleSelectEntity}/>
       <CardSwitcher

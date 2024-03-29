@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Box, Divider,
+  Box,
   Drawer, Icon,
   IconButton,
   List,
@@ -10,36 +10,35 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../Logo';
 import { useTheme } from '@mui/material/styles';
-
+import { StyledDivider } from './styledComponents';
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
-
   return (
     <>
-      <Box display='flex' justifyContent='space-between' margin='0 35px' >
+      <Box display="flex" justifyContent="space-between" margin="0 35px">
         <IconButton aria-label="logo"><Logo/></IconButton>
         <Drawer
-          anchor='left'
+          anchor="left"
           open={open}
           onClose={() => setOpen(false)}
         >
-          <Box width='250px' role="presentation" textAlign="center">
+          <Box width="250px" role="presentation" textAlign="center">
             <List>
               <ListItemButton>
                 <ListItemText>People</ListItemText>
               </ListItemButton>
-                <Divider variant='middle' />
+              <StyledDivider variant="middle"/>
               <ListItemButton>
                 <ListItemText>Planets</ListItemText>
               </ListItemButton>
-              <Divider variant='middle' />
+              <StyledDivider variant="middle"/>
               <ListItemButton>
                 <ListItemText>Starships</ListItemText>
               </ListItemButton>
-              <Divider variant='middle' />
+              <StyledDivider variant="middle"/>
               <ListItemButton>
                 <ListItemText>Vehicles</ListItemText>
               </ListItemButton>
@@ -51,7 +50,7 @@ const MobileMenu = () => {
           onClick={() => setOpen(true)}
           size="small"
           edge="start"
-          sx={{color: theme.palette.text.light}}
+          sx={{ color: theme.palette.text.light }}
           aria-label="menu"
         >
           <Icon component={MenuIcon} sx={{ fontSize: '40px' }}/>
