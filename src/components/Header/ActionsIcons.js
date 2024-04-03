@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import {
-  Badge,
-  Divider, IconButton,
+  Badge, Box,
+  Divider,
   List,
-  ListItem,
+  ListItem, ListItemButton,
   Tooltip,
 } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { desktopStyles, mobileStyles } from './styledComponents'
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 import { useTheme } from '@mui/material/styles';
@@ -13,10 +16,12 @@ import { useSelector } from 'react-redux';
 import EntityModal from '../EntityModal';
 
 const ActionsIcons = () => {
+  const items = useSelector(state => state.favorites.items);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const items = useSelector(state => state.favorites.items);
   const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -26,34 +31,37 @@ const ActionsIcons = () => {
     setIsModalOpen(false);
   };
 
+  let styleBox = isDesktop ? desktopStyles : mobileStyles;
+
   return (
-    <>
-      <List sx={{ display: 'flex' }}>
+    <Box sx={styleBox} >
+      <List sx={{ display: "flex", justifyContent: 'center' }}>
         <ListItem sx={{ margin: '0 20px' }}>
           <Tooltip title="Profile">
-            <IconButton
+            <ListItemButton
               sx={{ justifyContent: 'center', color: theme.palette.icon }}
               aria-label="Profile">
               <PersonIcon/>
-            </IconButton>
+            </ListItemButton>
           </Tooltip>
         </ListItem>
         <Divider flexItem variant="middle" orientation="vertical"/>
         <ListItem sx={{ margin: '0 20px' }}>
           <Tooltip title="Favorite">
-            <IconButton
+            <ListItemButton
               onClick={handleModalOpen}
               sx={{ justifyContent: 'center', color: theme.palette.icon }}
               aria-label="favorite">
-              <Badge badgeContent={items.length} max={20} sx={{ color: theme.palette.yellow }}>
-                <FavoriteIcon sx={{ color: theme.palette.yellow }} />
+              <Badge badgeContent={items.length} max={20}
+                     sx={{ color: theme.palette.yellow }}>
+                <FavoriteIcon sx={{ color: theme.palette.yellow }}/>
               </Badge>
-            </IconButton>
+            </ListItemButton>
           </Tooltip>
         </ListItem>
       </List>
       <EntityModal open={isModalOpen} onClose={handleModalClose}/>
-    </>
+    </Box>
   );
 };
 

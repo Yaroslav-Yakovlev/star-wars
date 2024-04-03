@@ -55,7 +55,7 @@ const DesktopMenu = ({ onSelectEntity }) => {
             <Tab label="Vehicles"/>
           </Tabs>
         </Box>
-        <ActionsIcons/>
+        <ActionsIcons />
       </Toolbar>
   );
 };

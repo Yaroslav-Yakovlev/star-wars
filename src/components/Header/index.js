@@ -7,7 +7,7 @@ import MobileMenu from './MobileMenu';
 
 const Header = ({ onSelectEntity }) => {
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <StyledAppBar position="static">

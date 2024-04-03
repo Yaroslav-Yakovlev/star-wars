@@ -81,9 +81,10 @@ const ImageDescription = ({ selectEntity }) => {
                   {isNameAvailable && <ImageListItemBar
                     sx={{
                       backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                      '&:hover': {backgroundColor: 'rgba(0, 0, 0, 0.4)'},
                       '& .MuiSvgIcon-root:hover': {
                         color: theme.palette.yellow,
-                      }
+                      },
                     }}
                     title={name}
                     actionIcon={

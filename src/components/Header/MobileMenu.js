@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../Logo';
 import { useTheme } from '@mui/material/styles';
 import { StyledDivider } from './styledComponents';
+import ActionsIcons from './ActionsIcons';
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
@@ -53,9 +54,10 @@ const MobileMenu = () => {
           sx={{ color: theme.palette.text.light }}
           aria-label="menu"
         >
-          <Icon component={MenuIcon} sx={{ fontSize: '40px' }}/>
+          <Icon component={MenuIcon} sx={{ fontSize: '40px', color: theme.palette.yellow }}/>
         </IconButton>
       </Box>
+      <ActionsIcons/>
     </>
   );
 };
