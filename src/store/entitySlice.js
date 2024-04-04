@@ -24,6 +24,7 @@ export const fetchEntityById = createAsyncThunk(
             'Mass': data.mass,
             'Height': data.height,
             imageUrl,
+            entity,
           };
         case 'planets':
           return {
@@ -34,6 +35,7 @@ export const fetchEntityById = createAsyncThunk(
             'Climate': data.climate,
             'Terrain': data.terrain,
             imageUrl,
+            entity,
           };
         case 'starships':
         case 'vehicles':
@@ -45,6 +47,7 @@ export const fetchEntityById = createAsyncThunk(
             'Manufacturer': data.manufacturer,
             'Cost in credits': data.cost_in_credits,
             imageUrl,
+            entity,
           };
       }
     } catch (error) {

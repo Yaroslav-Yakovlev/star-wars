@@ -3,9 +3,20 @@ import {
   Box,
   Button,
   Card,
-  CardMedia, DialogActions, DialogTitle, Divider,
-  Paper, Stack, Dialog,
-  Typography, IconButton, TextField, Slide,
+  CardMedia,
+  DialogActions,
+  DialogTitle,
+  Divider,
+  Paper,
+  Stack,
+  Dialog,
+  Typography,
+  IconButton,
+  TextField,
+  Slide,
+  FormControl,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -16,10 +27,20 @@ import { useTheme } from '@mui/material/styles';
 import CustomSnackbar from '../CustomSnackbar';
 import { openSnackbar } from '../../store/snackbarSlice';
 import { TransitionGroup } from 'react-transition-group';
+import {
+  selectFavoritesItems,
+  selectFilteredItems,
+} from '../../store/selectors';
 
 const EntityModal = ({ open, onClose }) => {
-  const items = useSelector(state => state.favorites.items);
-  const filteredItems = useSelector(state => state.favorites.filteredItems);
+  const [age, setAge] = useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const items = useSelector(selectFavoritesItems);
+  const filteredItems = useSelector(selectFilteredItems);
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
 
@@ -64,6 +85,8 @@ const EntityModal = ({ open, onClose }) => {
           {hasItems ? 'Favorite Entities' : 'Add Your Favorite Entities'}
         </DialogTitle>
 
+
+
         {hasItems && <TextField
           id="standard-basic"
           label="filter items"
@@ -74,6 +97,25 @@ const EntityModal = ({ open, onClose }) => {
 
         />
         }
+
+        <FormControl color='warning' variant="standard" >
+          <Select
+            color='warning'
+            id="demo-simple-select-standard"
+            value={age}
+            onChange={handleChange}
+            label="by Entity"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>People</MenuItem>
+            <MenuItem value={20}>Planets</MenuItem>
+            <MenuItem value={30}>Starships</MenuItem>
+            <MenuItem value={30}>Vehicles</MenuItem>
+          </Select>
+        </FormControl>
+
         <TransitionGroup>
           {(filteredItems.length === 0 ? items : filteredItems).map((item) => {
             return (

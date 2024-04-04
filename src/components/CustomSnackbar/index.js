@@ -5,11 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Slide } from '@mui/material';
 import { closeSnackbar } from '../../store/snackbarSlice';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { selectSnackbar } from '../../store/selectors';
+import theme from '../styles';
 
 const CustomSnackbar = () => {
   const dispatch = useDispatch();
-  const { message, open, vertical, horizontal, icon } = useSelector(
-    (state) => state.snackbar);
+  const { message, open, vertical, horizontal, icon } = useSelector(selectSnackbar);
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === 'clickaway') {
@@ -30,7 +31,11 @@ const CustomSnackbar = () => {
     >
       <SnackbarContent
         message={message}
-        action={icon === 'add' ? <CheckCircle/> : <RemoveCircleOutlineIcon/>}
+        action={
+          icon === 'add'
+            ? <CheckCircle sx={{color: theme.palette.yellow}}/>
+            : <RemoveCircleOutlineIcon sx={{color: theme.palette.yellow}}/>
+        }
       />
     </Snackbar>
   );

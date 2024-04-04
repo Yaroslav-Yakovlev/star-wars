@@ -14,12 +14,11 @@ import { useTheme } from '@mui/material/styles';
 import { addItem } from '../../store/favoriteEntitySlice';
 import CustomSnackbar from '../CustomSnackbar';
 import { openSnackbar } from '../../store/snackbarSlice';
+import { selectEntitiesData, selectFavoritesItems,} from '../../store/selectors';
 
 const ImageDescription = ({ selectEntity }) => {
-  const { name, imageUrl, ...otherData } = useSelector(
-    state => state.entities.data);
-  const favoriteItems = useSelector(
-    state => state.favorites.items.map(obj => obj.name));
+  const { name, imageUrl, ...otherData } = useSelector(selectEntitiesData);
+  const favoriteItemsNames = useSelector(selectFavoritesItems);
 
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -27,12 +26,12 @@ const ImageDescription = ({ selectEntity }) => {
   const isNameAvailable = name !== 'not available';
 
   const handlerAddToFavorite = () => {
-    const checkExistFavoriteItem = favoriteItems.some(item => item === name);
+    const isNameInFavoritesList = favoriteItemsNames.some(item => item === name);
 
     dispatch(addItem({ name, imageUrl, ...otherData }));
 
     dispatch(openSnackbar({
-        message: ` ${checkExistFavoriteItem
+        message: ` ${isNameInFavoritesList
           ? `${name} is already in favorite list`
           : `${name} added to favorite list`
         }`,
