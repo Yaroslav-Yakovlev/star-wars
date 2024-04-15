@@ -60,7 +60,7 @@ const ActionsIcons = () => {
           </Tooltip>
         </ListItem>
       </List>
-      <EntityModal open={isModalOpen} onClose={handleModalClose}/>
+      <EntityModal isModalOpen={isModalOpen} onClose={handleModalClose}/>
     </Box>
   );
 };

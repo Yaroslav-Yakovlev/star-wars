@@ -19,14 +19,14 @@ import { selectEntitiesData, selectFavoritesItems,} from '../../store/selectors'
 const ImageDescription = ({ selectEntity }) => {
   const { name, imageUrl, ...otherData } = useSelector(selectEntitiesData);
   const favoriteItemsNames = useSelector(selectFavoritesItems);
-
+  console.log(favoriteItemsNames);
   const theme = useTheme();
   const dispatch = useDispatch();
 
   const isNameAvailable = name !== 'not available';
 
   const handlerAddToFavorite = () => {
-    const isNameInFavoritesList = favoriteItemsNames.some(item => item === name);
+    const isNameInFavoritesList = favoriteItemsNames.some(item => item.name === name);
 
     dispatch(addItem({ name, imageUrl, ...otherData }));
 

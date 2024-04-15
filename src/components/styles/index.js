@@ -101,7 +101,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           width: '80%',
-          margin: '0 auto',
+          // margin: '0 auto',
           '& .MuiInputLabel-root': {
             color: colors.text.main,
           },

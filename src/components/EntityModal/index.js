@@ -14,12 +14,10 @@ import {
   IconButton,
   TextField,
   Slide,
-  FormControl,
-  Select,
-  MenuItem,
+  MenuItem, Menu,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useDispatch, useSelector } from 'react-redux';
 import fallBackImage from '../../images/r2d2.png';
 import { filterItems, removeItem } from '../../store/favoriteEntitySlice';
@@ -31,18 +29,24 @@ import {
   selectFavoritesItems,
   selectFilteredItems,
 } from '../../store/selectors';
+import { StyledButton, StyledStack } from './styledComponents';
 
-const EntityModal = ({ open, onClose }) => {
-  const [age, setAge] = useState('');
+const EntityModal = ({ isModalOpen, onClose }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const isOpenMenu = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const items = useSelector(selectFavoritesItems);
   const filteredItems = useSelector(selectFilteredItems);
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState('');
 
   const theme = useTheme();
 
@@ -72,7 +76,7 @@ const EntityModal = ({ open, onClose }) => {
   return (
     <>
       <Dialog
-        open={open}
+        open={isModalOpen}
         onClose={handleCloseFavoritesList}
         fullWidth
         maxWidth="md"
@@ -85,37 +89,46 @@ const EntityModal = ({ open, onClose }) => {
           {hasItems ? 'Favorite Entities' : 'Add Your Favorite Entities'}
         </DialogTitle>
 
-
-
-        {hasItems && <TextField
-          id="standard-basic"
-          label="filter items"
-          variant="standard"
-          value={inputValue}
-          onChange={handleFilterItems}
-          autoComplete="off"
-
-        />
-        }
-
-        <FormControl color='warning' variant="standard" >
-          <Select
-            color='warning'
-            id="demo-simple-select-standard"
-            value={age}
-            onChange={handleChange}
-            label="by Entity"
+        {hasItems && <StyledStack direction="row">
+          <TextField
+            id="standard-basic"
+            label="filter items"
+            variant="standard"
+            value={inputValue}
+            onChange={handleFilterItems}
+            autoComplete="off"
+          />
+          <StyledButton
+            id="resources-button"
+            aria-controls={isOpenMenu ? 'resources-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={isOpenMenu ? 'true' : undefined}
+            endIcon={<KeyboardArrowDownIcon
+              sx={{ marginRight: '4px', marginLeft: '4px' }}/>}
+            onClick={handleClick}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>People</MenuItem>
-            <MenuItem value={20}>Planets</MenuItem>
-            <MenuItem value={30}>Starships</MenuItem>
-            <MenuItem value={30}>Vehicles</MenuItem>
-          </Select>
-        </FormControl>
-
+          </StyledButton>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={isOpenMenu}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            PaperProps={{
+              sx: {
+                backgroundColor: theme.palette.primary.light,
+              },
+            }}
+          >
+            <MenuItem sx={{ color: theme.palette.text.main }}>People</MenuItem>
+            <MenuItem sx={{ color: theme.palette.text.main }}>Planets</MenuItem>
+            <MenuItem sx={{ color: theme.palette.text.main }}>Starships</MenuItem>
+            <MenuItem sx={{ color: theme.palette.text.main }}>Vehicles</MenuItem>
+          </Menu>
+        </StyledStack>
+        }
         <TransitionGroup>
           {(filteredItems.length === 0 ? items : filteredItems).map((item) => {
             return (
