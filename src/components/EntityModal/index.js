@@ -20,7 +20,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useDispatch, useSelector } from 'react-redux';
 import fallBackImage from '../../images/r2d2.png';
-import { filterItems, removeItem } from '../../store/favoriteEntitySlice';
+import {
+  filterItems,
+  removeItem,
+  selectItems,
+} from '../../store/favoriteEntitySlice';
 import { useTheme } from '@mui/material/styles';
 import CustomSnackbar from '../CustomSnackbar';
 import { openSnackbar } from '../../store/snackbarSlice';
@@ -37,10 +41,10 @@ const EntityModal = ({ isModalOpen, onClose }) => {
 
   const isOpenMenu = Boolean(anchorEl);
 
-  const handleClick = (event) => {
+  const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
 
@@ -71,6 +75,12 @@ const EntityModal = ({ isModalOpen, onClose }) => {
     onClose();
     dispatch(filterItems(''));
     setInputValue('');
+  };
+
+  const handleSelectItem = (event) => {
+    const value = event.target.getAttribute('value');
+    dispatch(selectItems(value));
+    handleCloseMenu();
   };
 
   return (
@@ -104,15 +114,15 @@ const EntityModal = ({ isModalOpen, onClose }) => {
             aria-haspopup="true"
             aria-expanded={isOpenMenu ? 'true' : undefined}
             endIcon={<KeyboardArrowDownIcon
+            onClick={handleOpenMenu}
               sx={{ marginRight: '4px', marginLeft: '4px' }}/>}
-            onClick={handleClick}
           >
           </StyledButton>
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={isOpenMenu}
-            onClose={handleClose}
+            onClose={handleCloseMenu}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
@@ -122,10 +132,41 @@ const EntityModal = ({ isModalOpen, onClose }) => {
               },
             }}
           >
-            <MenuItem sx={{ color: theme.palette.text.main }}>People</MenuItem>
-            <MenuItem sx={{ color: theme.palette.text.main }}>Planets</MenuItem>
-            <MenuItem sx={{ color: theme.palette.text.main }}>Starships</MenuItem>
-            <MenuItem sx={{ color: theme.palette.text.main }}>Vehicles</MenuItem>
+            <MenuItem
+              value="all"
+              onClick={handleSelectItem}
+              sx={{ color: theme.palette.text.main }}
+            >
+              All
+            </MenuItem>
+            <MenuItem
+              value="people"
+              onClick={handleSelectItem}
+              sx={{ color: theme.palette.text.main }}
+            >
+              People
+            </MenuItem>
+            <MenuItem
+              value="planets"
+              onClick={handleSelectItem}
+              sx={{ color: theme.palette.text.main }}
+            >
+              Planets
+            </MenuItem>
+            <MenuItem
+              value="starships"
+              onClick={handleSelectItem}
+              sx={{ color: theme.palette.text.main }}
+            >
+              Starships
+            </MenuItem>
+            <MenuItem
+              value="vehicles"
+              onClick={handleSelectItem}
+              sx={{ color: theme.palette.text.main }}
+            >
+              Vehicles
+            </MenuItem>
           </Menu>
         </StyledStack>
         }

@@ -17,6 +17,7 @@ export const fetchEntityById = createAsyncThunk(
       switch (entity) {
         case 'people':
           return {
+            entity,
             name: data.name,
             'Gender': data.gender,
             'Birth year': data.birth_year,
@@ -24,10 +25,10 @@ export const fetchEntityById = createAsyncThunk(
             'Mass': data.mass,
             'Height': data.height,
             imageUrl,
-            entity,
           };
         case 'planets':
           return {
+            entity,
             name: data.name,
             'Population': data.population,
             'Orbital period': data.orbital_period,
@@ -35,11 +36,11 @@ export const fetchEntityById = createAsyncThunk(
             'Climate': data.climate,
             'Terrain': data.terrain,
             imageUrl,
-            entity,
           };
         case 'starships':
         case 'vehicles':
           return {
+            entity,
             name: data.name,
             'Model': data.model,
             'Passengers': data.passengers,
@@ -47,7 +48,6 @@ export const fetchEntityById = createAsyncThunk(
             'Manufacturer': data.manufacturer,
             'Cost in credits': data.cost_in_credits,
             imageUrl,
-            entity,
           };
       }
     } catch (error) {

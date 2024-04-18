@@ -19,7 +19,6 @@ import { selectEntitiesData, selectFavoritesItems,} from '../../store/selectors'
 const ImageDescription = ({ selectEntity }) => {
   const { name, imageUrl, ...otherData } = useSelector(selectEntitiesData);
   const favoriteItemsNames = useSelector(selectFavoritesItems);
-  console.log(favoriteItemsNames);
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -65,7 +64,7 @@ const ImageDescription = ({ selectEntity }) => {
             <Card>
               <Tooltip placement="top-end" title="Add to favorite">
                 <CardActionArea
-                  onClick={handlerAddToFavorite}
+                  onClick={isNameAvailable ? handlerAddToFavorite : undefined}
                 >
                   <CardMedia
                     sx={{
@@ -106,7 +105,10 @@ const ImageDescription = ({ selectEntity }) => {
               <Typography marginLeft={1.5} variant="h4">{name}</Typography>
               <Divider/>
               <List>
-                {Object.entries(otherData).map(([key, value]) => {
+                {Object.entries(otherData).map(([key, value], index) => {
+                  if(index === 0) {
+                    return null
+                  }
                   return (
                     <ListItem key={key}>
                       <ListItemText
