@@ -13,9 +13,18 @@ import { useTheme } from '@mui/material/styles';
 import { StyledDivider } from './styledComponents';
 import ActionsIcons from './ActionsIcons';
 
-const MobileMenu = () => {
+const MobileMenu = ({ onSelectEntity, listOfEntities }) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
+
+  const capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  const handleEntityChange = (entity) => {
+    onSelectEntity(entity);
+    setOpen(false);
+  };
 
   return (
     <>
@@ -28,21 +37,17 @@ const MobileMenu = () => {
         >
           <Box width="250px" role="presentation" textAlign="center">
             <List>
-              <ListItemButton>
-                <ListItemText>People</ListItemText>
-              </ListItemButton>
-              <StyledDivider variant="middle"/>
-              <ListItemButton>
-                <ListItemText>Planets</ListItemText>
-              </ListItemButton>
-              <StyledDivider variant="middle"/>
-              <ListItemButton>
-                <ListItemText>Starships</ListItemText>
-              </ListItemButton>
-              <StyledDivider variant="middle"/>
-              <ListItemButton>
-                <ListItemText>Vehicles</ListItemText>
-              </ListItemButton>
+              {listOfEntities.map(entity => (
+                <>
+                  <ListItemButton
+                    key={entity}
+                    onClick={() => {handleEntityChange(entity);}}
+                  >
+                    <ListItemText>{capitalize(entity)}</ListItemText>
+                  </ListItemButton>
+                  <StyledDivider variant="middle"/>
+                </>
+              ))}
             </List>
           </Box>
         </Drawer>
@@ -54,7 +59,10 @@ const MobileMenu = () => {
           sx={{ color: theme.palette.text.light }}
           aria-label="menu"
         >
-          <Icon component={MenuIcon} sx={{ fontSize: '40px', color: theme.palette.yellow }}/>
+          <Icon
+            component={MenuIcon}
+            sx={{ fontSize: '40px', color: theme.palette.yellow }}
+          />
         </IconButton>
       </Box>
       <ActionsIcons/>

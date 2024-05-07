@@ -14,20 +14,26 @@ import { useTheme } from '@mui/material/styles';
 import { addItem } from '../../store/favoriteEntitySlice';
 import CustomSnackbar from '../CustomSnackbar';
 import { openSnackbar } from '../../store/snackbarSlice';
-import { selectEntitiesData, selectFavoritesItems,} from '../../store/selectors';
+import {
+  selectEntitiesData,
+  selectFavoritesItems,
+} from '../../store/selectors';
 
-const ImageDescription = ({ selectEntity }) => {
-  const { name, imageUrl, ...otherData } = useSelector(selectEntitiesData);
+const ImageDescription = ({ initialEntity }) => {
+  const { name, imageUrl, ...entityInfo } = useSelector(selectEntitiesData);
+
   const favoriteItemsNames = useSelector(selectFavoritesItems);
-  const theme = useTheme();
   const dispatch = useDispatch();
+
+  const theme = useTheme();
 
   const isNameAvailable = name !== 'not available';
 
   const handlerAddToFavorite = () => {
-    const isNameInFavoritesList = favoriteItemsNames.some(item => item.name === name);
+    const isNameInFavoritesList = favoriteItemsNames.some(
+      item => item.name === name);
 
-    dispatch(addItem({ name, imageUrl, ...otherData }));
+    dispatch(addItem({ name, imageUrl, ...entityInfo }));
 
     dispatch(openSnackbar({
         message: ` ${isNameInFavoritesList
@@ -73,13 +79,13 @@ const ImageDescription = ({ selectEntity }) => {
                     }}
                     component="img"
                     image={isNameAvailable ? imageUrl : fallBackImage}
-                    alt={selectEntity}
+                    alt={initialEntity}
                     onError={(e) => { e.target.src = fallBackImage;}}
                   />
                   {isNameAvailable && <ImageListItemBar
                     sx={{
                       backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                      '&:hover': {backgroundColor: 'rgba(0, 0, 0, 0.4)'},
+                      '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.4)' },
                       '& .MuiSvgIcon-root:hover': {
                         color: theme.palette.yellow,
                       },
@@ -105,9 +111,9 @@ const ImageDescription = ({ selectEntity }) => {
               <Typography marginLeft={1.5} variant="h4">{name}</Typography>
               <Divider/>
               <List>
-                {Object.entries(otherData).map(([key, value], index) => {
-                  if(index === 0) {
-                    return null
+                {Object.entries(entityInfo).map(([key, value], index) => {
+                  if (index === 0) {
+                    return null;
                   }
                   return (
                     <ListItem key={key}>

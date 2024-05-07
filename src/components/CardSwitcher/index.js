@@ -4,14 +4,14 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { MuiBox, MuiButton } from './styledComponents';
 import { Tooltip } from '@mui/material';
 
-const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
+const CardSwitcher = ({ switchToNextCharacterById, switchToPreviousCharacterById }) => {
   const boxRef = useRef(null);
 
   const handleKeyPress = (event) => {
     if (event.key === 'ArrowLeft') {
-      handlePreviousId();
+      switchToPreviousCharacterById();
     } else if (event.key === 'ArrowRight') {
-      handleNextId();
+      switchToNextCharacterById();
     }
 
     event.stopPropagation();
@@ -25,14 +25,14 @@ const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [handleNextId, handlePreviousId]);
+  }, [switchToNextCharacterById, switchToPreviousCharacterById]);
 
   return (
     <MuiBox>
       <Tooltip title="Previous">
         <MuiButton
           aria-label="Go to the previous item"
-          onClick={handlePreviousId}
+          onClick={switchToPreviousCharacterById}
         >
           <ArrowBackIosIcon/>
         </MuiButton>
@@ -41,7 +41,7 @@ const CardSwitcher = ({ handleNextId, handlePreviousId }) => {
         <MuiButton
           aria-label="Go to the next item"
           ref={boxRef}
-          onClick={handleNextId}
+          onClick={switchToNextCharacterById}
           disableFocusRipple
         >
           <ArrowForwardIosIcon/>

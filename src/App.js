@@ -6,32 +6,33 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './components/styles';
 import Footer from './components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEntityById, addEntity } from './store/entitySlice';
+import { fetchEntityById, setEntityFilterValue } from './store/entitySlice';
 import Loader from './components/Loader';
+import { selectIsLoading } from './store/selectors';
 
 const App = () => {
   const [selectEntity, setSelectEntity] = useState('people');
-  const [id, setId] = useState(1);
+  const [entityId, setEntityId] = useState(1);
 
   const dispatch = useDispatch();
-  const { isLoading } = useSelector(state => state.entities);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    dispatch(fetchEntityById({ entity: selectEntity, id }));
-    dispatch(addEntity(selectEntity));
-  }, [dispatch, selectEntity, id]);
+    dispatch(fetchEntityById({ entity: selectEntity, id: entityId }));
+    dispatch(setEntityFilterValue(selectEntity));
+  }, [dispatch, selectEntity, entityId]);
 
-  const handleNextId = () => {
-    setId((id) => id + 1);
+  const switchToNextCharacterById = () => {
+    setEntityId((id) => id + 1);
   };
 
-  const handlePreviousId = () => {
-    setId((id) => id === 1 ? 1 : id - 1);
+  const switchToPreviousCharacterById = () => {
+    setEntityId((id) => id === 1 ? 1 : id - 1);
   };
 
   const handleSelectEntity = (entity) => {
     setSelectEntity(entity);
-    setId(1);
+    setEntityId(1);
   };
 
   return (
@@ -40,8 +41,8 @@ const App = () => {
       {isLoading && <Loader/>}
       <Header onSelectEntity={handleSelectEntity}/>
       <CardSwitcher
-        handleNextId={handleNextId}
-        handlePreviousId={handlePreviousId}
+        switchToNextCharacterById={switchToNextCharacterById}
+        switchToPreviousCharacterById={switchToPreviousCharacterById}
       />
       <ImageDescription selectEntity={selectEntity}/>
       <Footer/>

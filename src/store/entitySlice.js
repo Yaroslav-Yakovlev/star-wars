@@ -58,6 +58,7 @@ export const fetchEntityById = createAsyncThunk(
 );
 
 const initialState = {
+  listOfEntities: ['people', 'planets', 'starships', 'vehicles'],
   data: {},
   isLoading: true,
   entity: ''
@@ -67,7 +68,7 @@ const entitySlice = createSlice({
   name: 'entities',
   initialState: initialState,
   reducers: {
-    addEntity: (state, action) => {
+    setEntityFilterValue: (state, action) => {
       state.entity = action.payload;
     },
   },
@@ -87,7 +88,7 @@ const entitySlice = createSlice({
   },
 });
 
-export const { addEntity } = entitySlice.actions;
+export const { setEntityFilterValue } = entitySlice.actions;
 
 export default entitySlice.reducer;
 

@@ -14,11 +14,12 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import EntityModal from '../EntityModal';
+import { selectFavoritesItems } from '../../store/selectors';
 
 const ActionsIcons = () => {
-  const items = useSelector(state => state.favorites.items);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const items = useSelector(selectFavoritesItems);
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
