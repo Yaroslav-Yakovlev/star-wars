@@ -12,14 +12,11 @@ import Logo from '../Logo';
 import { useTheme } from '@mui/material/styles';
 import { StyledDivider } from './styledComponents';
 import ActionsIcons from './ActionsIcons';
+import { capitalize } from '../../utils';
 
 const MobileMenu = ({ onSelectEntity, listOfEntities }) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
-
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
 
   const handleEntityChange = (entity) => {
     onSelectEntity(entity);
@@ -37,17 +34,20 @@ const MobileMenu = ({ onSelectEntity, listOfEntities }) => {
         >
           <Box width="250px" role="presentation" textAlign="center">
             <List>
-              {listOfEntities.map(entity => (
-                <>
-                  <ListItemButton
-                    key={entity}
-                    onClick={() => {handleEntityChange(entity);}}
-                  >
-                    <ListItemText>{capitalize(entity)}</ListItemText>
-                  </ListItemButton>
-                  <StyledDivider variant="middle"/>
-                </>
-              ))}
+              {listOfEntities.map(entity => {
+                  return entity === 'all'
+                    ? null
+                    : <>
+                      <ListItemButton
+                        key={entity}
+                        onClick={() => {handleEntityChange(entity);}}
+                      >
+                        <ListItemText>{capitalize(entity)}</ListItemText>
+                      </ListItemButton>
+                      <StyledDivider variant="middle"/>
+                    </>;
+                },
+              )}
             </List>
           </Box>
         </Drawer>

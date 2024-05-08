@@ -111,8 +111,8 @@ const ImageDescription = ({ initialEntity }) => {
               <Typography marginLeft={1.5} variant="h4">{name}</Typography>
               <Divider/>
               <List>
-                {Object.entries(entityInfo).map(([key, value], index) => {
-                  if (index === 0) {
+                {Object.entries(entityInfo).map(([key, value]) => {
+                  if (key === 'entity') {
                     return null;
                   }
                   return (

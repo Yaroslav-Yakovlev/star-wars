@@ -31,9 +31,10 @@ import { openSnackbar } from '../../store/snackbarSlice';
 import { TransitionGroup } from 'react-transition-group';
 import {
   selectFavoritesItems,
-  selectFilteredItems,
+  selectFilteredItems, selectListOfEntities,
 } from '../../store/selectors';
 import { StyledButton, StyledStack } from './styledComponents';
+import { capitalize } from '../../utils';
 
 const EntityModal = ({ isModalOpen, onClose }) => {
   const [inputValue, setInputValue] = useState('');
@@ -50,6 +51,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
 
   const items = useSelector(selectFavoritesItems);
   const filteredItems = useSelector(selectFilteredItems);
+  const listOfEntities = useSelector(selectListOfEntities);
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -132,41 +134,15 @@ const EntityModal = ({ isModalOpen, onClose }) => {
               },
             }}
           >
-            <MenuItem
-              value="all"
-              onClick={handleSelectItem}
-              sx={{ color: theme.palette.text.main }}
-            >
-              All
-            </MenuItem>
-            <MenuItem
-              value="people"
-              onClick={handleSelectItem}
-              sx={{ color: theme.palette.text.main }}
-            >
-              People
-            </MenuItem>
-            <MenuItem
-              value="planets"
-              onClick={handleSelectItem}
-              sx={{ color: theme.palette.text.main }}
-            >
-              Planets
-            </MenuItem>
-            <MenuItem
-              value="starships"
-              onClick={handleSelectItem}
-              sx={{ color: theme.palette.text.main }}
-            >
-              Starships
-            </MenuItem>
-            <MenuItem
-              value="vehicles"
-              onClick={handleSelectItem}
-              sx={{ color: theme.palette.text.main }}
-            >
-              Vehicles
-            </MenuItem>
+            {listOfEntities.map(entity => (
+              <MenuItem
+                value={entity}
+                onClick={handleSelectItem}
+                sx={{ color: theme.palette.text.main }}
+              >
+                {capitalize(entity)}
+              </MenuItem>
+            ))}
           </Menu>
         </StyledStack>
         }

@@ -8,6 +8,7 @@ import {
 import Logo from '../Logo';
 import { useTheme } from '@mui/material/styles';
 import ActionsIcons from './ActionsIcons';
+import { capitalize } from '../../utils'
 
 const DesktopMenu = ({ onSelectEntity, listOfEntities }) => {
   const [tabValue, setTabValue] = useState(0);
@@ -34,9 +35,11 @@ const DesktopMenu = ({ onSelectEntity, listOfEntities }) => {
             },
           }}
         >
-          {listOfEntities.map(entity => (
-            <Tab key={entity} label={entity}/>
-          ))}
+          {listOfEntities.map(entity => {
+            return entity === 'all'
+              ? null
+              : <Tab key={entity} label={capitalize(entity)}/>;
+          })}
         </Tabs>
       </Box>
       <ActionsIcons/>

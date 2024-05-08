@@ -58,7 +58,7 @@ export const fetchEntityById = createAsyncThunk(
 );
 
 const initialState = {
-  listOfEntities: ['people', 'planets', 'starships', 'vehicles'],
+  listOfEntities: ['all', 'people', 'planets', 'starships', 'vehicles'],
   data: {},
   isLoading: true,
   entity: ''
