@@ -5,7 +5,7 @@ import {
   List,
   ListItem,
   ListItemText, Paper, Stack,
-  Typography, CardActionArea, Tooltip,
+  Typography, CardActionArea, Tooltip, useMediaQuery,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import fallBackImage from '../../images/r2d2.png';
@@ -20,12 +20,13 @@ import {
 } from '../../store/selectors';
 
 const ImageDescription = ({ initialEntity }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
+
   const { name, imageUrl, ...entityInfo } = useSelector(selectEntitiesData);
 
   const favoriteItemsNames = useSelector(selectFavoritesItems);
   const dispatch = useDispatch();
-
-  const theme = useTheme();
 
   const isNameAvailable = name !== 'not available';
 
@@ -66,7 +67,7 @@ const ImageDescription = ({ initialEntity }) => {
           elevation={5}
           style={{ marginBottom: '20px' }}
         >
-          <Stack direction="row" spacing={4}>
+          <Stack direction={isMobile ? 'row' : 'column'} spacing={4}>
             <Card>
               <Tooltip placement="top-end" title="Add to favorite">
                 <CardActionArea

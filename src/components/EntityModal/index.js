@@ -6,7 +6,6 @@ import {
   CardMedia,
   DialogActions,
   DialogTitle,
-  Divider,
   Paper,
   Stack,
   Dialog,
@@ -14,7 +13,7 @@ import {
   IconButton,
   TextField,
   Slide,
-  MenuItem, Menu,
+  MenuItem, Menu, useMediaQuery,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -33,7 +32,10 @@ import {
   selectFavoritesItems,
   selectFilteredItems, selectListOfEntities,
 } from '../../store/selectors';
-import { StyledButton, StyledStack } from './styledComponents';
+import {
+  StyledSelectButton,
+  StyledStack,
+} from './styledComponents';
 import { capitalize } from '../../utils';
 
 const EntityModal = ({ isModalOpen, onClose }) => {
@@ -55,6 +57,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
   const dispatch = useDispatch();
 
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
 
   const hasItems = items.length !== 0;
 
@@ -110,7 +113,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
             onChange={handleFilterItems}
             autoComplete="off"
           />
-          <StyledButton
+          <StyledSelectButton
             id="resources-button"
             aria-controls={isOpenMenu ? 'resources-menu' : undefined}
             aria-haspopup="true"
@@ -119,7 +122,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
             onClick={handleOpenMenu}
               sx={{ marginRight: '4px', marginLeft: '4px' }}/>}
           >
-          </StyledButton>
+          </StyledSelectButton>
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -166,7 +169,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
                     backgroundColor: theme.palette.primary.light,
                   }}
                 >
-                  <Stack direction="row"
+                  <Stack direction={isMobile ? 'row' : 'column'}
                          sx={{ display: 'flex', alignItems: 'center' }}>
                     <Card>
                       <CardMedia
@@ -182,7 +185,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
                         {item.name}
                       </Typography>
                     </Box>
-                    <Divider/>
+                    <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <IconButton
                       sx={{ marginLeft: 'auto' }}
                       size="large"
@@ -194,6 +197,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
                           color: theme.palette.text.main,
                         }}/>
                     </IconButton>
+                    </Box>
                   </Stack>
                 </Paper>
               </Slide>

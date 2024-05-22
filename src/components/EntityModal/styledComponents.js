@@ -9,7 +9,7 @@ export const StyledStack = styled(Stack) ({
   width: '80%'
 });
 
-export const StyledButton = styled(Button) ({
+export const StyledSelectButton = styled(Button) ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
