@@ -9,6 +9,9 @@ import { selectListOfEntities } from '../../store/selectors';
 
 const Header = ({ onSelectEntity }) => {
   const listOfEntities = useSelector(selectListOfEntities);
+
+  const menuEntityList = listOfEntities.filter(entity => entity !== 'all');
+
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -16,11 +19,11 @@ const Header = ({ onSelectEntity }) => {
     <StyledAppBar position="static">
       {isDesktop
         ? <DesktopMenu
-          listOfEntities={listOfEntities}
+          menuEntityList={menuEntityList}
           onSelectEntity={onSelectEntity}
         />
         : <MobileMenu
-          listOfEntities={listOfEntities}
+          menuEntityList={menuEntityList}
           onSelectEntity={onSelectEntity}
         />
       }

@@ -14,7 +14,7 @@ import { StyledDivider } from './styledComponents';
 import ActionsIcons from './ActionsIcons';
 import { capitalize } from '../../utils';
 
-const MobileMenu = ({ onSelectEntity, listOfEntities }) => {
+const MobileMenu = ({ onSelectEntity, menuEntityList }) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
@@ -34,10 +34,8 @@ const MobileMenu = ({ onSelectEntity, listOfEntities }) => {
         >
           <Box width="250px" role="presentation" textAlign="center">
             <List>
-              {listOfEntities.map(entity => {
-                  return entity === 'all'
-                    ? null
-                    : <>
+              {menuEntityList.map(entity => (
+                     <React.Fragment key={entity}>
                       <ListItemButton
                         key={entity}
                         onClick={() => {handleEntityChange(entity);}}
@@ -45,9 +43,8 @@ const MobileMenu = ({ onSelectEntity, listOfEntities }) => {
                         <ListItemText>{capitalize(entity)}</ListItemText>
                       </ListItemButton>
                       <StyledDivider variant="middle"/>
-                    </>;
-                },
-              )}
+                    </React.Fragment>
+                ))}
             </List>
           </Box>
         </Drawer>

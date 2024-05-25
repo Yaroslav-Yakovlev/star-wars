@@ -67,7 +67,7 @@ const Footer = () => {
         </Grid>
       </Grid>
       <Box marginTop="20px">
-        <Divider/>
+        <Divider variant="middle"/>
         <Typography paddingTop="16px" variant="body2"
                     color={theme.palette.text.dark}>
           © {new Date().getFullYear()} All rights reserved.

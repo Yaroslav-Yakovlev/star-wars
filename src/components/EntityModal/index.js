@@ -107,7 +107,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
         {hasItems && <StyledStack direction="row">
           <TextField
             id="standard-basic"
-            label="filter items"
+            label="filter items by name"
             variant="standard"
             value={inputValue}
             onChange={handleFilterItems}
@@ -139,6 +139,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
           >
             {listOfEntities.map(entity => (
               <MenuItem
+                key={entity}
                 value={entity}
                 onClick={handleSelectItem}
                 sx={{ color: theme.palette.text.main }}
@@ -169,7 +170,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
                     backgroundColor: theme.palette.primary.light,
                   }}
                 >
-                  <Stack direction={isMobile ? 'row' : 'column'}
+                  <Stack key={item.name} direction={isMobile ? 'row' : 'column'}
                          sx={{ display: 'flex', alignItems: 'center' }}>
                     <Card>
                       <CardMedia
