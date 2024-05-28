@@ -30,7 +30,7 @@ const ImageDescription = ({ initialEntity }) => {
 
   const isNameAvailable = name !== 'not available';
 
-  const handlerAddToFavorite = () => {
+  const handleAddToFavorite = () => {
     const isNameInFavoritesList = favoriteItemsNames.some(
       item => item.name === name);
 
@@ -71,7 +71,7 @@ const ImageDescription = ({ initialEntity }) => {
             <Card>
               <Tooltip placement="top-end" title="Add to favorite">
                 <CardActionArea
-                  onClick={isNameAvailable ? handlerAddToFavorite : undefined}
+                  onClick={isNameAvailable ? handleAddToFavorite : undefined}
                 >
                   <CardMedia
                     sx={{

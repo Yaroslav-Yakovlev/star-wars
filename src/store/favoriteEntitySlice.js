@@ -31,8 +31,9 @@ const favoriteEntitySlice = createSlice({
     selectItems: (state, action) => {
       if (action.payload === 'all') {
         state.filteredItems = state.items;
+      } else {
+        state.filteredItems = state.items.filter(item => item.entity === action.payload);
       }
-      state.filteredItems = state.items.filter(item => item.entity === action.payload);
     },
   },
 });
