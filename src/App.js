@@ -13,7 +13,6 @@ import { selectIsLoading } from './store/selectors';
 const App = () => {
   const [selectEntity, setSelectEntity] = useState('people');
   const [entityId, setEntityId] = useState(1);
-
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
 
@@ -44,7 +43,7 @@ const App = () => {
         switchToNextCharacterById={switchToNextCharacterById}
         switchToPreviousCharacterById={switchToPreviousCharacterById}
       />
-      <ImageDescription selectEntity={selectEntity}/>
+      <ImageDescription />
       <Footer/>
     </ThemeProvider>
   );

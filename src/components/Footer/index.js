@@ -16,6 +16,7 @@ const Footer = () => {
   return (
     <StyledFooter
       component="footer"
+      role='footer'
     >
       <Grid
         container

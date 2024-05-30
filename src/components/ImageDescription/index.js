@@ -19,7 +19,7 @@ import {
   selectFavoritesItems,
 } from '../../store/selectors';
 
-const ImageDescription = ({ initialEntity }) => {
+const ImageDescription = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -50,6 +50,7 @@ const ImageDescription = ({ initialEntity }) => {
   return (
     <>
       <Box
+        role='image-description'
         sx={{
           paddingBottom: '100px',
           width: '100%',
@@ -80,7 +81,7 @@ const ImageDescription = ({ initialEntity }) => {
                     }}
                     component="img"
                     image={isNameAvailable ? imageUrl : fallBackImage}
-                    alt={initialEntity}
+                    alt={name}
                     onError={(e) => { e.target.src = fallBackImage;}}
                   />
                   {isNameAvailable && <ImageListItemBar

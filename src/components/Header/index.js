@@ -16,7 +16,7 @@ const Header = ({ onSelectEntity }) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
-    <StyledAppBar position="static">
+    <StyledAppBar role='header' position="static">
       {isDesktop
         ? <DesktopMenu
           menuEntityList={menuEntityList}
