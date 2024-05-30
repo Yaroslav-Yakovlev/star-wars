@@ -6,11 +6,6 @@ import store from './store';
 import { fetchEntityById } from './store/entitySlice';
 
 describe('App', () => {
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('should renders the Header component', () => {
     const { getByRole } = render(
       <Provider store={store}>
