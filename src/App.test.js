@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { getByRole, render } from '@testing-library/react';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -16,7 +16,7 @@ describe('App', () => {
     expect(header).toBeInTheDocument();
   });
 
-  it('should renders the CardSwitcher component',  () => {
+  it('should renders the CardSwitcher component', () => {
     const { getByRole } = render(
       <Provider store={store}>
         <App/>
@@ -26,7 +26,7 @@ describe('App', () => {
     expect(cardSwitcher).toBeInTheDocument();
   });
 
-  it('should renders the Footer component',  () => {
+  it('should renders the Footer component', () => {
     const { getByRole } = render(
       <Provider store={store}>
         <App/>
@@ -47,7 +47,8 @@ describe('App', () => {
   });
 
   it('should calls fetchEntityById function when the component mounts', () => {
-    const fetchEntityByIdMock = jest.spyOn(require('./store/entitySlice'), 'fetchEntityById');
+    const fetchEntityByIdMock = jest.spyOn(require('./store/entitySlice'),
+      'fetchEntityById');
     render(
       <Provider store={store}>
         <App/>
