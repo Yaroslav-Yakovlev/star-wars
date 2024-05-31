@@ -31,7 +31,7 @@ const CardSwitcher = ({ switchToNextCharacterById, switchToPreviousCharacterById
     <MuiBox role='card-switcher'>
       <Tooltip title="Previous">
         <MuiButton
-          role='next-button'
+          role='previous-button'
           aria-label="Go to the previous item"
           onClick={switchToPreviousCharacterById}
         >
@@ -40,6 +40,7 @@ const CardSwitcher = ({ switchToNextCharacterById, switchToPreviousCharacterById
       </Tooltip>
       <Tooltip title="Next">
         <MuiButton
+          role='next-button'
           aria-label="Go to the next item"
           ref={boxRef}
           onClick={switchToNextCharacterById}
