@@ -35,13 +35,16 @@ const ActionsIcons = () => {
   let styleBox = isDesktop ? desktopStyles : mobileStyles;
 
   return (
-    <Box sx={styleBox} >
+    <Box
+      role='actions-icons'
+      sx={styleBox}
+    >
       <List sx={{ display: "flex", justifyContent: 'center' }}>
         <ListItem sx={{ margin: '0 20px' }}>
           <Tooltip title="Profile">
             <ListItemButton
               sx={{ justifyContent: 'center', color: theme.palette.icon }}
-              aria-label="Profile">
+              aria-label="profile">
               <PersonIcon/>
             </ListItemButton>
           </Tooltip>
@@ -50,11 +53,14 @@ const ActionsIcons = () => {
         <ListItem sx={{ margin: '0 20px' }}>
           <Tooltip title="Favorite">
             <ListItemButton
+              role='favorite-button'
               onClick={handleModalOpen}
               sx={{ justifyContent: 'center', color: theme.palette.icon }}
               aria-label="favorite">
-              <Badge badgeContent={items.length} max={20}
-                     sx={{ color: theme.palette.yellow }}>
+              <Badge
+                badgeContent={items.length} max={20}
+                sx={{ color: theme.palette.yellow }}
+              >
                 <FavoriteIcon sx={{ color: theme.palette.yellow }}/>
               </Badge>
             </ListItemButton>

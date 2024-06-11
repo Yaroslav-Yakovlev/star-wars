@@ -4,6 +4,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
 import { fetchEntityById } from './store/entitySlice';
+import * as entityActions from './store/entitySlice';
 
 describe('App', () => {
   it('should renders the Header component', () => {
@@ -12,8 +13,8 @@ describe('App', () => {
         <App/>
       </Provider>,
     );
-    const header = getByRole('header');
-    expect(header).toBeInTheDocument();
+
+    expect(getByRole('header')).toBeInTheDocument();
   });
 
   it('should renders the CardSwitcher component', () => {
@@ -22,8 +23,8 @@ describe('App', () => {
         <App/>
       </Provider>,
     );
-    const cardSwitcher = getByRole('card-switcher');
-    expect(cardSwitcher).toBeInTheDocument();
+
+    expect(getByRole('card-switcher')).toBeInTheDocument();
   });
 
   it('should renders the Footer component', () => {
@@ -32,8 +33,8 @@ describe('App', () => {
         <App/>
       </Provider>,
     );
-    const footer = getByRole('footer');
-    expect(footer).toBeInTheDocument();
+
+    expect(getByRole('footer')).toBeInTheDocument();
   });
 
   it('should renders the ImageDescription component', () => {
@@ -42,19 +43,43 @@ describe('App', () => {
         <App/>
       </Provider>,
     );
-    const imageDescription = getByRole('image-description');
-    expect(imageDescription).toBeInTheDocument();
+
+    expect(getByRole('image-description')).toBeInTheDocument();
   });
 
   it('should calls fetchEntityById function when the component mounts', () => {
-    const fetchEntityByIdMock = jest.spyOn(require('./store/entitySlice'),
-      'fetchEntityById');
+    const fetchEntityByIdMock = jest.spyOn(entityActions, 'fetchEntityById');
+
     render(
       <Provider store={store}>
         <App/>
       </Provider>,
     );
+
     expect(fetchEntityByIdMock).toHaveBeenCalledTimes(1);
     fetchEntityByIdMock.mockRestore();
+  });
+
+  it('should call fetchEntityById function with two arguments ', function () {
+    const fetchEntityByIdMock = jest.spyOn(entityActions, 'fetchEntityById');
+
+    render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+    );
+
+    expect(fetchEntityByIdMock).toHaveBeenCalledWith({ entity: 'people', id: 1 });
+    fetchEntityByIdMock.mockRestore();
+  });
+
+  it('should display the Loader component when isLoading is true ', () => {
+    jest.fn().mockImplementation(() => true);
+    const { getByRole } = render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+    );
+    expect(getByRole('loader')).toBeInTheDocument();
   });
 });

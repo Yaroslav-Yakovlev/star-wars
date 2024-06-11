@@ -5,7 +5,10 @@ import { Box } from '@mui/material';
 const Loader = () => {
 
   return (
-    <Box sx={{ width: '100%', margin: 'auto', position: 'fixed' }}>
+    <Box
+      role='loader'
+      sx={{ width: '100%', margin: 'auto', position: 'fixed' }}
+    >
       <LinearProgress color="primary" variant="indeterminate"/>
     </Box>
   );
