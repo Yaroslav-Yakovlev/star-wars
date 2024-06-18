@@ -6,7 +6,7 @@ import store from './store';
 import { fetchEntityById } from './store/entitySlice';
 import * as entityActions from './store/entitySlice';
 
-describe('App', () => {
+describe('App component', () => {
   it('should renders the Header component', () => {
     const { getByRole } = render(
       <Provider store={store}>
@@ -60,7 +60,7 @@ describe('App', () => {
     fetchEntityByIdMock.mockRestore();
   });
 
-  it('should call fetchEntityById function with two arguments ', function () {
+  it('should call fetchEntityById function with two arguments ', () => {
     const fetchEntityByIdMock = jest.spyOn(entityActions, 'fetchEntityById');
 
     render(
@@ -74,7 +74,6 @@ describe('App', () => {
   });
 
   it('should display the Loader component when isLoading is true ', () => {
-    jest.fn().mockImplementation(() => true);
     const { getByRole } = render(
       <Provider store={store}>
         <App/>
