@@ -53,16 +53,16 @@ const Footer = () => {
           </Typography>
           <Box display="flex">
             <StyledIcons>
-              <InstagramIcon/>
+              <InstagramIcon data-testid='instagram-icon'/>
             </StyledIcons>
             <StyledIcons>
-              <TelegramIcon/>
+              <TelegramIcon data-testid='telegram-icon'/>
             </StyledIcons>
             <StyledIcons>
-              <YouTubeIcon/>
+              <YouTubeIcon data-testid='youTube-icon'/>
             </StyledIcons>
             <StyledIcons>
-              <FacebookIcon/>
+              <FacebookIcon data-testid='facebook-icon'/>
             </StyledIcons>
           </Box>
         </Grid>
