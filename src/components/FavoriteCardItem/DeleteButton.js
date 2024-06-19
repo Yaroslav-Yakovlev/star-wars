@@ -6,13 +6,13 @@ import { useDispatch } from 'react-redux';
 import { removeItem } from '../../store/favoriteEntitySlice';
 import { openSnackbar } from '../../store/snackbarSlice';
 
-const DeleteButton = ({ itemName, setIsVisibleFavoriteCartItem }) => {
+const DeleteButton = ({ itemName, setIsVisibleFavoriteCardItem }) => {
   const theme = useTheme();
 
   const dispatch = useDispatch();
 
   const handleRemoveItem = (itemName) => {
-    setIsVisibleFavoriteCartItem(false);
+    setIsVisibleFavoriteCardItem(false);
     dispatch(removeItem(itemName));
     dispatch(openSnackbar({
       message: `${itemName} removed from favorite list`,

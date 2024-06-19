@@ -37,7 +37,7 @@ describe('App component', () => {
     expect(getByRole('footer')).toBeInTheDocument();
   });
 
-  it('should renders the ImageDescription component', () => {
+  it('should renders the EntityCard component', () => {
     const { getByRole } = render(
       <Provider store={store}>
         <App/>

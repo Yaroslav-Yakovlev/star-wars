@@ -11,16 +11,16 @@ import { TransitionGroup } from 'react-transition-group';
 import { selectFilteredItems } from '../../store/selectors';
 import EntityFilter from '../EntityFilter';
 import { StyledDialogTitle } from './styledComponents';
-import FavoriteCartItem from '../FavoriteCartItem';
+import FavoriteCartItem from '../FavoriteCardItem';
 import CloseEntityModalButton from './CloseEntityModalButton';
 
 const EntityModal = ({ isModalOpen, handleModalClose }) => {
   const [inputValue, setInputValue] = useState('');
   const [selectValue, setSelectValue] = useState('');
-  const [isVisibleFavoriteCartItem, setIsVisibleFavoriteCartItem] = useState(true);
+  const [isVisibleFavoriteCardItem, setIsVisibleFavoriteCardItem] = useState(
+    true);
 
   const filteredItems = useSelector(selectFilteredItems);
-
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -77,7 +77,7 @@ const EntityModal = ({ isModalOpen, handleModalClose }) => {
             <Slide
               key={item.name}
               direction="right"
-              in={isVisibleFavoriteCartItem}
+              in={isVisibleFavoriteCardItem}
               timeout={700}
               unmountOnExit
             >
@@ -94,7 +94,7 @@ const EntityModal = ({ isModalOpen, handleModalClose }) => {
                 <FavoriteCartItem
                   key={item.name}
                   item={item}
-                  setIsVisibleFavoriteCartItem={setIsVisibleFavoriteCartItem}
+                  setIsVisibleFavoriteCardItem={setIsVisibleFavoriteCardItem}
                 />
               </Paper>
             </Slide>
