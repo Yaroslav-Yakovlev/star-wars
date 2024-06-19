@@ -15,6 +15,7 @@ const InputFilter = ({ inputValue, setInputValue }) => {
 
   return (
     <TextField
+      role='input-filter'
       id="standard-basic"
       label="filter items by name"
       variant="standard"

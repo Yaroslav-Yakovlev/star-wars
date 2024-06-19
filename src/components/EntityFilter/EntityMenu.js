@@ -12,6 +12,7 @@ const EntityMenu = ({ handleCloseMenu, anchorEl, isOpenMenu, handleSelectItem })
 
   return (
     <Menu
+      role='entity-menu'
       id="basic-menu"
       anchorEl={anchorEl}
       open={isOpenMenu}
