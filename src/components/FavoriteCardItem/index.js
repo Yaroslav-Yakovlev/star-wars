@@ -11,7 +11,7 @@ import { useTheme } from '@mui/material/styles';
 import DeleteButton from './DeleteButton';
 import fallBackImage from '../../images/r2d2.png';
 
-const FavoriteCartItem = ({ item, setIsVisibleFavoriteCartItem }) => {
+const FavoriteCardItem = ({ item, setIsVisibleFavoriteCardItem }) => {
   const theme = useTheme();
 
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
@@ -40,10 +40,10 @@ const FavoriteCartItem = ({ item, setIsVisibleFavoriteCartItem }) => {
       </Box>
       <DeleteButton
         itemName={item.name}
-        setIsVisibleFavoriteCartItem={setIsVisibleFavoriteCartItem}
+        setIsVisibleFavoriteCardItem={setIsVisibleFavoriteCardItem}
       />
     </Stack>
   );
 };
 
-export default FavoriteCartItem;
+export default FavoriteCardItem;

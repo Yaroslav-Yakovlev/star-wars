@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import { useEffect, useState } from 'react';
 import CardSwitcher from './components/CardSwitcher';
-import ImageDescription from './components/ImageDescription';
+import EntityCard from './components/EntityCard';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './components/styles';
 import Footer from './components/Footer';
@@ -43,7 +43,7 @@ const App = () => {
         switchToNextCharacterById={switchToNextCharacterById}
         switchToPreviousCharacterById={switchToPreviousCharacterById}
       />
-      <ImageDescription />
+      <EntityCard />
       <Footer/>
     </ThemeProvider>
   );
