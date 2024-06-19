@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Dialog,
+  Dialog, Paper, Slide,
   Typography,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,11 +14,13 @@ import { StyledDialogTitle } from './styledComponents';
 import FavoriteCartItem from '../FavoriteCartItem';
 import CloseEntityModalButton from './CloseEntityModalButton';
 
-const EntityModal = ({ isModalOpen, onClose }) => {
+const EntityModal = ({ isModalOpen, handleModalClose }) => {
   const [inputValue, setInputValue] = useState('');
   const [selectValue, setSelectValue] = useState('');
+  const [isVisibleFavoriteCartItem, setIsVisibleFavoriteCartItem] = useState(true);
 
   const filteredItems = useSelector(selectFilteredItems);
+
   const dispatch = useDispatch();
 
   const theme = useTheme();
@@ -26,7 +28,7 @@ const EntityModal = ({ isModalOpen, onClose }) => {
   const hasFilteredItems = filteredItems.length !== 0;
 
   const handleCloseFavoritesList = () => {
-    onClose();
+    handleModalClose();
     dispatch(filterItems(''));
     setInputValue('');
     setSelectValue('');
@@ -48,7 +50,8 @@ const EntityModal = ({ isModalOpen, onClose }) => {
         <StyledDialogTitle>
           {hasFilteredItems
             ? 'Favorite Entities'
-            : 'Add Your Favorite Entities'}
+            : 'Add Your Favorite Entities'
+          }
         </StyledDialogTitle>
 
         <EntityFilter
@@ -71,14 +74,35 @@ const EntityModal = ({ isModalOpen, onClose }) => {
         )}
         <TransitionGroup>
           {filteredItems.map((item) => (
-            <FavoriteCartItem
+            <Slide
               key={item.name}
-              item={item}
-            />
+              direction="right"
+              in={isVisibleFavoriteCartItem}
+              timeout={700}
+              unmountOnExit
+            >
+              <Paper
+                key={item.name}
+                variant="elevation"
+                elevation={10}
+                sx={{
+                  padding: '0px',
+                  marginTop: '20px',
+                  backgroundColor: theme.palette.primary.light,
+                }}
+              >
+                <FavoriteCartItem
+                  key={item.name}
+                  item={item}
+                  setIsVisibleFavoriteCartItem={setIsVisibleFavoriteCartItem}
+                />
+              </Paper>
+            </Slide>
           ))}
         </TransitionGroup>
         <CloseEntityModalButton
-          handleCloseFavoritesList={handleCloseFavoritesList}/>
+          handleCloseFavoritesList={handleCloseFavoritesList}
+        />
       </Dialog>
       <CustomSnackbar/>
     </>
