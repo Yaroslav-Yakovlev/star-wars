@@ -29,10 +29,11 @@ const SelectButtonFilter = ({ getSelectValue }) => {
   return (
     <>
     <StyledSelectButton
+      role='select-button-filter'
       id="resources-button"
-      aria-controls={isOpenMenu ? 'resources-menu' : undefined}
+      aria-controls={isOpenMenu ? 'resources-menu' : null}
       aria-haspopup="true"
-      aria-expanded={isOpenMenu ? 'true' : undefined}
+      aria-expanded={isOpenMenu ? 'true' : null}
       endIcon={<KeyboardArrowDownIcon
         onClick={handleOpenMenu}
         sx={{ marginRight: '4px', marginLeft: '4px' }}/>}

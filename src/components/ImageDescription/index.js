@@ -28,7 +28,7 @@ const ImageDescription = () => {
   const favoriteItemsNames = useSelector(selectFavoritesItems);
   const dispatch = useDispatch();
 
-  const isNameAvailable = name !== 'not available';
+  const isEntityAvailable = name !== 'not available';
 
   const handleAddToFavorite = () => {
     const isNameInFavoritesList = favoriteItemsNames.some(
@@ -50,7 +50,7 @@ const ImageDescription = () => {
   return (
     <>
       <Box
-        role='image-description'
+        role="image-description"
         sx={{
           paddingBottom: '100px',
           width: '100%',
@@ -72,7 +72,7 @@ const ImageDescription = () => {
             <Card>
               <Tooltip placement="top-end" title="Add to favorite">
                 <CardActionArea
-                  onClick={isNameAvailable ? handleAddToFavorite : undefined}
+                  onClick={isEntityAvailable ? handleAddToFavorite : null}
                 >
                   <CardMedia
                     sx={{
@@ -80,11 +80,11 @@ const ImageDescription = () => {
                       height: '50vh',
                     }}
                     component="img"
-                    image={isNameAvailable ? imageUrl : fallBackImage}
+                    image={isEntityAvailable ? imageUrl : fallBackImage}
                     alt={name}
                     onError={(e) => { e.target.src = fallBackImage;}}
                   />
-                  {isNameAvailable && <ImageListItemBar
+                  {isEntityAvailable && <ImageListItemBar
                     sx={{
                       backgroundColor: 'rgba(0, 0, 0, 0.2)',
                       '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.4)' },
