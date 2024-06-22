@@ -6,7 +6,10 @@ import SelectButtonFilter from './SelectButtonFilter';
 const EntityFilter = ({ inputValue, setInputValue, getSelectValue }) => {
 
   return (
-    <StyledStack direction="row">
+    <StyledStack
+      role='entity-filter'
+      direction="row"
+    >
       <InputFilter
         setInputValue={setInputValue}
         inputValue={inputValue}
