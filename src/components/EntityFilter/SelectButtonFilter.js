@@ -34,8 +34,8 @@ const SelectButtonFilter = ({ getSelectValue }) => {
       aria-controls={isOpenMenu ? 'resources-menu' : null}
       aria-haspopup="true"
       aria-expanded={isOpenMenu ? 'true' : null}
+      onClick={handleOpenMenu}
       endIcon={<KeyboardArrowDownIcon
-        onClick={handleOpenMenu}
         sx={{ marginRight: '4px', marginLeft: '4px' }}/>}
     >
     </StyledSelectButton>

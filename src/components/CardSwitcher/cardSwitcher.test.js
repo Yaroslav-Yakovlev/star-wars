@@ -63,7 +63,7 @@ describe('CardSwitcher component', () => {
       expect(mockSwitchToNextCharacterById).toHaveBeenCalledTimes(0);
     });
 
-  it('should call handleKeyPress function when the ArrowRight  key is pressed', function () {
+  it('should call handleKeyPress function when the ArrowRight  key is pressed',  () => {
     render(
       <CardSwitcher
         switchToPreviousCharacterById={mockSwitchToPreviousCharacterById}
