@@ -17,12 +17,12 @@ const InputFilter = ({ inputValue, setInputValue }) => {
     <TextField
       role='input-filter'
       inputProps={{ 'data-testid': 'input-filter' }}
-      id="standard-basic"
-      label="filter items by name"
-      variant="standard"
+      id='standard-basic'
+      label='filter items by name'
+      variant='standard'
       value={inputValue}
       onChange={handleFilterItems}
-      autoComplete="off"
+      autoComplete='off'
     />
   );
 };
