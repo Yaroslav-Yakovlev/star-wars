@@ -1,54 +1,35 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { screen, render } from '@testing-library/react';
-import configureMockStore from 'redux-mock-store';
+import { screen } from '@testing-library/react';
 import EntityMenu from '../EntityMenu';
 import { capitalize } from '../../../utils/index';
-
-const mockStore = configureMockStore();
-
-const rendersWithMockStore = (store, props) => {
-  return render(
-    <Provider store={store}>
-      <EntityMenu {...props} />
-    </Provider>,
-  );
-};
+import { renderWithMockStore } from './renderWithMockStore';
 
 describe('EntityMenu component', () => {
-  let store;
+  let initialState;
+  let props;
 
   beforeEach(() => {
-    store = mockStore({
+    initialState = {
       entities: {
         listOfEntities: ['all', 'people', 'planets', 'starships', 'vehicles'],
       },
-    });
-
-  });
-
-  it('should render EntityMenu component', () => {
-    const props = {
+    };
+    props = {
       handleCloseMenu: jest.fn(),
       anchorEl: document.createElement('div'),
       isOpenMenu: true,
       handleSelectItem: jest.fn(),
     };
+  });
 
-    rendersWithMockStore(store, props);
+  it('should render EntityMenu component', () => {
+    renderWithMockStore(<EntityMenu {...props} />, { initialState });
 
     expect(screen.getByRole('entity-menu')).toBeInTheDocument();
   });
 
   it('should render EntityMenu with list of entities', () => {
-    const props = {
-      handleCloseMenu: jest.fn(),
-      anchorEl: document.createElement('div'),
-      isOpenMenu: true,
-      handleSelectItem: jest.fn(),
-    };
-
-    rendersWithMockStore(store, props);
+    renderWithMockStore(<EntityMenu {...props} />, { initialState });
 
     const mockListOfEntities = [
       'all',
@@ -57,7 +38,7 @@ describe('EntityMenu component', () => {
       'starships',
       'vehicles'];
 
-    mockListOfEntities.map(entity => {
+    mockListOfEntities.forEach(entity => {
       const menuItem = screen.getByRole(entity);
       const textContent = capitalize(entity);
       expect(menuItem).toHaveTextContent(textContent);

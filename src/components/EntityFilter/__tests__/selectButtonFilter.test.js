@@ -1,44 +1,43 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { screen, render, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import configureMockStore from 'redux-mock-store';
 import SelectButtonFilter from '../SelectButtonFilter';
 import { selectItems } from '../../../store/favoriteEntitySlice';
+import { renderWithMockStore } from './renderWithMockStore';
 
 const mockStore = configureMockStore();
 
-const rendersWithMockStore = (store, getSelectValue) => {
-  return render(
-    <Provider store={store}>
-      <SelectButtonFilter getSelectValue={getSelectValue}/>
-    </Provider>,
-  );
-};
-
 describe('SelectButtonFilter component', () => {
+  let initialState;
+  let props;
   let store;
-  let getSelectValue;
 
   beforeEach(() => {
-    store = mockStore({
+    initialState = {
       entities: {
         listOfEntities: ['all', 'people', 'planets', 'starships', 'vehicles'],
       },
-    });
-    getSelectValue = jest.fn();
+    };
+
+    props = {
+      getSelectValue: jest.fn(),
+    };
+
+    store = mockStore(initialState);
+
     const originalDispatch = store.dispatch;
     store.dispatch = jest.fn(originalDispatch);
   });
 
   it('should render EntityMenu component', () => {
-    rendersWithMockStore(store);
+    renderWithMockStore(<SelectButtonFilter {...props}/>, { store });
 
     expect(screen.getByRole('select-button-filter')).toBeInTheDocument();
   });
 
   it('should open and close entity-menu on button click', () => {
 
-    rendersWithMockStore(store, getSelectValue);
+    renderWithMockStore(<SelectButtonFilter {...props}/>, { store });
 
     const button = screen.getByRole('select-button-filter');
     fireEvent.click(button);
@@ -49,77 +48,26 @@ describe('SelectButtonFilter component', () => {
       .toBeNull();
   });
 
-  it('should call getSelectValue and dispatch selectItems on /All/ item click',
+  it('should call getSelectValue and dispatch selectItems on item click',
     () => {
-      rendersWithMockStore(store, getSelectValue);
+      renderWithMockStore(<SelectButtonFilter {...props}/>, { store });
 
-      const button = screen.getByRole('select-button-filter');
-      fireEvent.click(button);
+      const mockListOfEntities = [
+        'all',
+        'people',
+        'planets',
+        'starships',
+        'vehicles'];
 
-      const menuItem = screen.getByRole('all');
-      fireEvent.click(menuItem);
+      mockListOfEntities.forEach(entityItem => {
+        const button = screen.getByRole('select-button-filter');
+        fireEvent.click(button);
 
-      expect(getSelectValue).toHaveBeenCalledWith('all');
-      expect(store.dispatch).toHaveBeenCalledWith(selectItems('all'));
-    });
+        const menuItem = screen.getByRole(entityItem);
+        fireEvent.click(menuItem);
 
-  it(
-    'should call getSelectValue and dispatch selectItems on /People/ item click',
-    () => {
-      rendersWithMockStore(store, getSelectValue);
-
-      const button = screen.getByRole('select-button-filter');
-      fireEvent.click(button);
-
-      const menuItem = screen.getByRole('people');
-      fireEvent.click(menuItem);
-
-      expect(getSelectValue).toHaveBeenCalledWith('people');
-      expect(store.dispatch).toHaveBeenCalledWith(selectItems('people'));
-    });
-
-  it(
-    'should call getSelectValue and dispatch selectItems on /Planets/ item click',
-    () => {
-      rendersWithMockStore(store, getSelectValue);
-
-      const button = screen.getByRole('select-button-filter');
-      fireEvent.click(button);
-
-      const menuItem = screen.getByRole('planets');
-      fireEvent.click(menuItem);
-
-      expect(getSelectValue).toHaveBeenCalledWith('planets');
-      expect(store.dispatch).toHaveBeenCalledWith(selectItems('planets'));
-    });
-
-  it(
-    'should call getSelectValue and dispatch selectItems on /Starships/ item click',
-    () => {
-      rendersWithMockStore(store, getSelectValue);
-
-      const button = screen.getByRole('select-button-filter');
-      fireEvent.click(button);
-
-      const menuItem = screen.getByRole('starships');
-      fireEvent.click(menuItem);
-
-      expect(getSelectValue).toHaveBeenCalledWith('starships');
-      expect(store.dispatch).toHaveBeenCalledWith(selectItems('starships'));
-    });
-
-  it(
-    'should call getSelectValue and dispatch selectItems on /Vehicles/ item click',
-    () => {
-      rendersWithMockStore(store, getSelectValue);
-
-      const button = screen.getByRole('select-button-filter');
-      fireEvent.click(button);
-
-      const menuItem = screen.getByRole('vehicles');
-      fireEvent.click(menuItem);
-
-      expect(getSelectValue).toHaveBeenCalledWith('vehicles');
-      expect(store.dispatch).toHaveBeenCalledWith(selectItems('vehicles'));
+        expect(props.getSelectValue).toHaveBeenCalledWith(entityItem);
+        expect(store.dispatch).toHaveBeenCalledWith(selectItems(entityItem));
+      });
     });
 });
