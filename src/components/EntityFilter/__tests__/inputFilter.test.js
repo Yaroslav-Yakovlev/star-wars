@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import InputFilter from '../InputFilter';
-import { renderWithMockStore } from './renderWithMockStore';
+import { renderWithMockStore } from '../../../test-utils/renderWithMockStore';
 import configureMockStore from 'redux-mock-store';
 import { filterItems } from '../../../store/favoriteEntitySlice';
 

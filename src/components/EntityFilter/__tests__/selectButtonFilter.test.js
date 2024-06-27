@@ -3,7 +3,7 @@ import { screen, fireEvent } from '@testing-library/react';
 import configureMockStore from 'redux-mock-store';
 import SelectButtonFilter from '../SelectButtonFilter';
 import { selectItems } from '../../../store/favoriteEntitySlice';
-import { renderWithMockStore } from './renderWithMockStore';
+import { renderWithMockStore } from '../../../test-utils/renderWithMockStore';
 
 const mockStore = configureMockStore();
 

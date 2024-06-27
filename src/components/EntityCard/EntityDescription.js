@@ -13,7 +13,10 @@ const EntityDescription = ({ entityInfo, name }) => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ color: theme.palette.text.light }}>
+    <Box
+      role='entity-description'
+      sx={{ color: theme.palette.text.light }}
+    >
       <Typography marginLeft={1.5} variant="h4">{name}</Typography>
       <Divider/>
       <List>

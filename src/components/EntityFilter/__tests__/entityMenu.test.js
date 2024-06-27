@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import EntityMenu from '../EntityMenu';
 import { capitalize } from '../../../utils/index';
-import { renderWithMockStore } from './renderWithMockStore';
+import { renderWithMockStore } from '../../../test-utils/renderWithMockStore';
 
 describe('EntityMenu component', () => {
   let initialState;
