@@ -44,7 +44,7 @@ describe('App component', () => {
       </Provider>,
     );
 
-    expect(getByRole('image-description')).toBeInTheDocument();
+    expect(getByRole('entity-card')).toBeInTheDocument();
   });
 
   it('should calls fetchEntityById function when the component mounts', () => {

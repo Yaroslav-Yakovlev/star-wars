@@ -22,7 +22,7 @@ const EntityCard = () => {
   return (
     <>
       <Box
-        role="image-description"
+        role='entity-card'
         sx={{
           paddingBottom: '100px',
           width: '100%',

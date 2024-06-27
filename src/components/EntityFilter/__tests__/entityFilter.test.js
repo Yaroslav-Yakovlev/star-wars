@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import EntityFilter from '../index';
-import { renderWithMockStore } from './renderWithMockStore';
+import { renderWithMockStore } from '../../../test-utils/renderWithMockStore';
 
 describe('EntityFilter', () => {
     const initialState = {
@@ -12,7 +12,7 @@ describe('EntityFilter', () => {
         items: [],
         filteredItems: [],
       },
-    }
+    };
 
   it('should render EntityFilter component', () => {
     renderWithMockStore(<EntityFilter/>, { initialState });

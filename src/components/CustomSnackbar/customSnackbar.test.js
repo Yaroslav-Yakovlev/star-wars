@@ -1,24 +1,19 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import CustomSnackbar from './index';
 import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
 import { closeSnackbar } from '../../store/snackbarSlice';
 import { act } from 'react-dom/test-utils';
+import { renderWithMockStore } from '../../test-utils/renderWithMockStore';
 
 const mockStore = configureMockStore();
 
-const rendersWithMockStore = (store) => {
-  return render(
-    <Provider store={store}>
-      <CustomSnackbar/>
-    </Provider>
-  )
-}
-
 describe('CustomSnackbar component', () => {
-  it('should renders with message and correct icon when opened', () => {
-    const store = mockStore({
+  let initialState;
+  let store;
+
+  beforeEach(() => {
+    initialState = {
       snackbar: {
         open: true,
         message: 'Item added',
@@ -26,9 +21,16 @@ describe('CustomSnackbar component', () => {
         vertical: 'bottom',
         horizontal: 'right',
       },
-    });
+    };
 
-    rendersWithMockStore(store)
+    store = mockStore(initialState);
+
+    const originalDispatch = store.dispatch;
+    store.dispatch = jest.fn(originalDispatch);
+  });
+
+  it('should renders with message and correct icon when opened', () => {
+    renderWithMockStore(<CustomSnackbar/>, { store });
 
     expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
     expect(screen.getByText('Item added')).toBeInTheDocument();
@@ -36,17 +38,10 @@ describe('CustomSnackbar component', () => {
   });
 
   it('should renders with remove icon when item is remove', () => {
-    const store = mockStore({
-      snackbar: {
-        open: true,
-        message: 'Item removed',
-        icon: 'remove',
-        vertical: 'bottom',
-        horizontal: 'right',
-      },
-    });
+    initialState.snackbar.message = 'Item removed';
+    initialState.snackbar.icon = 'remove';
 
-    rendersWithMockStore(store);
+    renderWithMockStore(<CustomSnackbar/>, { store });
 
     expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
     expect(screen.getByText('Item removed')).toBeInTheDocument();
@@ -54,17 +49,7 @@ describe('CustomSnackbar component', () => {
   });
 
   it('should closes when clicking away', () => {
-    const store = mockStore({
-      snackbar: {
-        open: true,
-        message: 'Item added',
-        icon: 'add',
-        vertical: 'bottom',
-        horizontal: 'right',
-      },
-    });
-
-    rendersWithMockStore(store);
+    renderWithMockStore(<CustomSnackbar/>, { store });
 
     expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
     fireEvent.click(document.body);
@@ -74,22 +59,13 @@ describe('CustomSnackbar component', () => {
 
   it('should auto hides after duration', () => {
     jest.useFakeTimers();
-    const store = mockStore({
-      snackbar: {
-        open: true,
-        message: 'Item added',
-        icon: 'add',
-        vertical: 'bottom',
-        horizontal: 'right',
-      }
-    });
 
-    rendersWithMockStore(store);
+    renderWithMockStore(<CustomSnackbar/>, { store });
 
     expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
     act(() => {
       jest.advanceTimersByTime(2000);
-    })
+    });
     expect(store.getActions()).toContainEqual(closeSnackbar());
     jest.useRealTimers();
   });

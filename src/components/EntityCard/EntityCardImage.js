@@ -23,7 +23,7 @@ const EntityCardImage = ({ name, imageUrl, entityInfo }) => {
 
   const isEntityAvailable = name !== 'not available';
 
-  const handleAddToFavorite = () => {
+  const handleAddToFavoriteList = () => {
     const isNameInFavoritesList = favoriteItems.some(
       item => item.name === name);
 
@@ -42,10 +42,10 @@ const EntityCardImage = ({ name, imageUrl, entityInfo }) => {
 
   return (
     <>
-      <Card>
+      <Card role='entity-card-image'>
         <Tooltip placement="top-end" title="Add to favorite">
           <CardActionArea
-            onClick={isEntityAvailable ? handleAddToFavorite : null}
+            onClick={isEntityAvailable ? handleAddToFavoriteList : null}
           >
             <CardMedia
               sx={{
