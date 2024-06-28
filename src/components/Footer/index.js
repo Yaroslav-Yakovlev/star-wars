@@ -5,18 +5,17 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import {
-  commonGridStyles, commonTypographyStyled,
-  StyledFooter,
-  StyledIcons,
+  commonGridStyles, commonTypographyStyled, MuiBox, StyledIcons
 } from './styledComponents';
 import theme from '../styles';
 
 const Footer = () => {
 
   return (
-    <StyledFooter
+    <MuiBox
       component="footer"
-      role='footer'
+      // role='footer'
+      data-testid='footer'
     >
       <Grid
         container
@@ -74,7 +73,7 @@ const Footer = () => {
           © {new Date().getFullYear()} All rights reserved.
         </Typography>
       </Box>
-    </StyledFooter>
+    </MuiBox>
   );
 };
 

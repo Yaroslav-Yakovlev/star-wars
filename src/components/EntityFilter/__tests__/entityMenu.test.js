@@ -25,7 +25,9 @@ describe('EntityMenu component', () => {
   it('should render EntityMenu component', () => {
     renderWithMockStore(<EntityMenu {...props} />, { initialState });
 
-    expect(screen.getByRole('entity-menu')).toBeInTheDocument();
+    const entityMenu = screen.getByRole('menu');
+
+    expect(entityMenu).toBeInTheDocument();
   });
 
   it('should render EntityMenu with list of entities', () => {
@@ -39,7 +41,7 @@ describe('EntityMenu component', () => {
       'vehicles'];
 
     mockListOfEntities.forEach(entity => {
-      const menuItem = screen.getByRole(entity);
+      const menuItem = screen.getByTestId(entity);
       const textContent = capitalize(entity);
       expect(menuItem).toHaveTextContent(textContent);
     });

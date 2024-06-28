@@ -23,6 +23,7 @@ const EntityCard = () => {
     <>
       <Box
         role='entity-card'
+        data-testid='entity-card'
         sx={{
           paddingBottom: '100px',
           width: '100%',

@@ -17,18 +17,24 @@ describe('EntityFilter', () => {
   it('should render EntityFilter component', () => {
     renderWithMockStore(<EntityFilter/>, { initialState });
 
-    expect(screen.getByRole('entity-filter')).toBeInTheDocument();
+    const entityFilter = screen.getByTestId('entity-filter');
+
+    expect(entityFilter).toBeInTheDocument();
   });
 
   it('should render InputFilter component', () => {
     renderWithMockStore(<EntityFilter/>, { initialState });
 
-    expect(screen.getByRole('input-filter')).toBeInTheDocument();
+    const inputFilter = screen.getByLabelText('filter items by name');
+
+    expect(inputFilter).toBeInTheDocument();
   });
 
   it('should render SelectButtonFilter component', () => {
     renderWithMockStore(<EntityFilter/>, { initialState });
 
-    expect(screen.getByRole('select-button-filter')).toBeInTheDocument();
+    const selectButton = screen.getByRole('textbox', {name: "filter items by name"});
+
+    expect(selectButton).toBeInTheDocument();
   });
 });

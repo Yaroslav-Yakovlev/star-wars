@@ -10,7 +10,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../Logo';
 import { useTheme } from '@mui/material/styles';
-import { StyledDivider } from './styledComponents';
+import { MuiDivider } from './styledComponents';
 import ActionsIcons from './ActionsIcons';
 import { capitalize } from '../../utils';
 
@@ -42,7 +42,7 @@ const MobileMenu = ({ onSelectEntity, menuEntityList }) => {
                       >
                         <ListItemText>{capitalize(entity)}</ListItemText>
                       </ListItemButton>
-                      <StyledDivider variant="middle"/>
+                      <MuiDivider variant="middle"/>
                     </React.Fragment>
                 ))}
             </List>

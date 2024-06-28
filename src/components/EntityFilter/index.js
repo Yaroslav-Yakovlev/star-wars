@@ -1,13 +1,13 @@
 import React from 'react';
-import { StyledStack } from './styledComponents';
+import { MuiStack } from './styledComponents';
 import InputFilter from './InputFilter';
 import SelectButtonFilter from './SelectButtonFilter';
 
 const EntityFilter = ({ inputValue, setInputValue, getSelectValue }) => {
 
   return (
-    <StyledStack
-      role='entity-filter'
+    <MuiStack
+      data-testid='entity-filter'
       direction="row"
     >
       <InputFilter
@@ -15,7 +15,7 @@ const EntityFilter = ({ inputValue, setInputValue, getSelectValue }) => {
         inputValue={inputValue}
       />
       <SelectButtonFilter getSelectValue={getSelectValue}/>
-    </StyledStack>
+    </MuiStack>
   );
 };
 
