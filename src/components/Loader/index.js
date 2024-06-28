@@ -6,7 +6,7 @@ const Loader = () => {
 
   return (
     <Box
-      role='loader'
+      data-testid='loader'
       sx={{ width: '100%', margin: 'auto', position: 'fixed' }}
     >
       <LinearProgress color="primary" variant="indeterminate"/>

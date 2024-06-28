@@ -2,9 +2,10 @@ import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import CustomSnackbar from './index';
 import configureMockStore from 'redux-mock-store';
+
+import { renderWithMockStore } from '../../test-utils/renderWithMockStore';
 import { closeSnackbar } from '../../store/snackbarSlice';
 import { act } from 'react-dom/test-utils';
-import { renderWithMockStore } from '../../test-utils/renderWithMockStore';
 
 const mockStore = configureMockStore();
 
@@ -32,9 +33,13 @@ describe('CustomSnackbar component', () => {
   it('should renders with message and correct icon when opened', () => {
     renderWithMockStore(<CustomSnackbar/>, { store });
 
-    expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
-    expect(screen.getByText('Item added')).toBeInTheDocument();
-    expect(screen.getByTestId('CheckCircleIcon')).toBeInTheDocument();
+    const customSnackbar = screen.getByRole('presentation');
+    const snackbarMessage = screen.getByRole('alert');
+    const checkIcon = screen.getByTestId('CheckCircleIcon');
+
+    expect(customSnackbar).toBeInTheDocument();
+    expect(snackbarMessage).toHaveTextContent('Item added');
+    expect(checkIcon).toBeInTheDocument();
   });
 
   it('should renders with remove icon when item is remove', () => {
@@ -43,17 +48,26 @@ describe('CustomSnackbar component', () => {
 
     renderWithMockStore(<CustomSnackbar/>, { store });
 
-    expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
-    expect(screen.getByText('Item removed')).toBeInTheDocument();
-    expect(screen.getByTestId('RemoveCircleOutlineIcon')).toBeInTheDocument();
+    const customSnackbar = screen.getByRole('presentation');
+    const snackbarMessage = screen.getByRole('alert');
+    const removeIcon = screen.getByTestId('RemoveCircleOutlineIcon');
+
+    expect(customSnackbar).toBeInTheDocument();
+    expect(snackbarMessage).toHaveTextContent('Item removed');
+    expect(removeIcon).toBeInTheDocument();
   });
 
   it('should closes when clicking away', () => {
     renderWithMockStore(<CustomSnackbar/>, { store });
 
-    expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
+    const customSnackbar = screen.getByRole('presentation');
+
+    expect(customSnackbar).toBeInTheDocument();
+
     fireEvent.click(document.body);
+
     store.dispatch(closeSnackbar());
+
     expect(store.getActions()).toContainEqual(closeSnackbar());
   });
 
@@ -62,10 +76,14 @@ describe('CustomSnackbar component', () => {
 
     renderWithMockStore(<CustomSnackbar/>, { store });
 
-    expect(screen.getByRole('custom-snackbar')).toBeInTheDocument();
+    const customSnackbar = screen.getByRole('presentation');
+
+    expect(customSnackbar).toBeInTheDocument();
+
     act(() => {
       jest.advanceTimersByTime(2000);
     });
+
     expect(store.getActions()).toContainEqual(closeSnackbar());
     jest.useRealTimers();
   });

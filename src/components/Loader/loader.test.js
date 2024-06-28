@@ -1,25 +1,27 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Loader from './index';
 
 describe('Loader component', () => {
-  it('should render the Loader component', function () {
-    const { getByRole } = render(<Loader/>);
+  it('should render the Loader component', () => {
+    render(<Loader/>);
 
-    expect(getByRole('loader')).toBeInTheDocument();
+    const loader = screen.getByTestId('loader');
+    expect(loader).toBeInTheDocument();
+
   });
 
   it('should render LinearProgress component',() => {
-    const { getByRole } = render(<Loader/>);
+    render(<Loader/>);
 
-    const loader = getByRole('loader');
+    const loader = screen.getByTestId('loader');
     expect(loader.querySelector('.MuiLinearProgress-root')).toBeInTheDocument();
   });
 
   it('should render Loader with variant="indeterminate"', () => {
-    const { getByRole } = render(<Loader/>);
+    render(<Loader/>);
 
-    const loader = getByRole('loader')
+    const loader = screen.getByTestId('loader')
     expect(loader.querySelector('.MuiLinearProgress-indeterminate')).toBeInTheDocument();
-  })
+  });
 });

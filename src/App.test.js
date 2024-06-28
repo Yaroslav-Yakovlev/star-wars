@@ -18,13 +18,13 @@ describe('App component', () => {
   });
 
   it('should renders the CardSwitcher component', () => {
-    const { getByRole } = render(
+    const { getByTestId } = render(
       <Provider store={store}>
         <App/>
       </Provider>,
     );
 
-    expect(getByRole('card-switcher')).toBeInTheDocument();
+    expect(getByTestId('card-switcher')).toBeInTheDocument();
   });
 
   it('should renders the Footer component', () => {

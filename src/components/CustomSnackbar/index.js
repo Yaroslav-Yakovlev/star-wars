@@ -22,7 +22,7 @@ const CustomSnackbar = () => {
 
   return (
     <Snackbar
-      role='custom-snackbar'
+      data-testid='custom-snackbar'
       anchorOrigin={{ vertical, horizontal }}
       open={open}
       autoHideDuration={2000}
