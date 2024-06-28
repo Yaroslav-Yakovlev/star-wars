@@ -1,5 +1,5 @@
 import React from 'react';
-import { getByRole, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -8,43 +8,47 @@ import * as entityActions from './store/entitySlice';
 
 describe('App component', () => {
   it('should renders the Header component', () => {
-    const { getByRole } = render(
+    render(
       <Provider store={store}>
         <App/>
       </Provider>,
     );
+    const header = screen.getByTestId('header');
 
-    expect(getByRole('header')).toBeInTheDocument();
+    expect(header).toBeInTheDocument();
   });
 
   it('should renders the CardSwitcher component', () => {
-    const { getByTestId } = render(
+    render(
       <Provider store={store}>
         <App/>
       </Provider>,
     );
+    const cardSwitcher = screen.getByTestId('card-switcher');
 
-    expect(getByTestId('card-switcher')).toBeInTheDocument();
-  });
-
-  it('should renders the Footer component', () => {
-    const { getByRole } = render(
-      <Provider store={store}>
-        <App/>
-      </Provider>,
-    );
-
-    expect(getByRole('footer')).toBeInTheDocument();
+    expect(cardSwitcher).toBeInTheDocument();
   });
 
   it('should renders the EntityCard component', () => {
-    const { getByRole } = render(
+    render(
       <Provider store={store}>
         <App/>
       </Provider>,
     );
+    const entityCard = screen.getByTestId('entity-card');
 
-    expect(getByRole('entity-card')).toBeInTheDocument();
+    expect(entityCard).toBeInTheDocument();
+  });
+
+  it('should renders the Footer component', () => {
+    render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+    );
+    const footer = screen.getByTestId('footer');
+
+    expect(footer).toBeInTheDocument();
   });
 
   it('should calls fetchEntityById function when the component mounts', () => {
@@ -74,11 +78,14 @@ describe('App component', () => {
   });
 
   it('should display the Loader component when isLoading is true ', () => {
-    const { getByRole } = render(
+    render(
       <Provider store={store}>
         <App/>
       </Provider>,
     );
-    expect(getByRole('loader')).toBeInTheDocument();
+
+    const loader = screen.getByTestId('loader');
+
+    expect(loader).toBeInTheDocument();
   });
 });

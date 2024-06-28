@@ -29,7 +29,7 @@ const SelectButtonFilter = ({ getSelectValue }) => {
   return (
     <>
     <StyledSelectButton
-      role='select-button-filter'
+      data-testid='select-button-filter'
       id="resources-button"
       aria-controls={isOpenMenu ? 'resources-menu' : null}
       aria-haspopup="true"

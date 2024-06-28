@@ -13,7 +13,6 @@ const EntityMenu = ({ handleCloseMenu, anchorEl, isOpenMenu, handleSelectItem })
   return (
     <Menu
       data-testid="entity-menu"
-      role='entity-menu'
       id="basic-menu"
       anchorEl={anchorEl}
       open={isOpenMenu}
@@ -29,7 +28,7 @@ const EntityMenu = ({ handleCloseMenu, anchorEl, isOpenMenu, handleSelectItem })
     >
       {listOfEntities.map(entity => (
         <MenuItem
-          role={entity}
+          data-testid={entity}
           key={entity}
           value={entity}
           onClick={handleSelectItem}

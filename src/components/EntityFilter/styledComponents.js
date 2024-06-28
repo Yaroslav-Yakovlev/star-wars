@@ -1,7 +1,7 @@
 import { Button, Stack, styled } from '@mui/material';
 import theme from '../styles';
 
-export const StyledStack = styled(Stack) ({
+export const MuiStack = styled(Stack) ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'flex-end',

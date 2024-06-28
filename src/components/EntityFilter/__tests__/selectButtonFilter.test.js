@@ -32,20 +32,24 @@ describe('SelectButtonFilter component', () => {
   it('should render EntityMenu component', () => {
     renderWithMockStore(<SelectButtonFilter {...props}/>, { store });
 
-    expect(screen.getByRole('select-button-filter')).toBeInTheDocument();
+    const selectButton = screen.getByTestId('select-button-filter');
+
+    expect(selectButton.tagName).toBe('BUTTON');
+    expect(selectButton).toBeInTheDocument();
   });
 
   it('should open and close entity-menu on button click', () => {
 
     renderWithMockStore(<SelectButtonFilter {...props}/>, { store });
 
-    const button = screen.getByRole('select-button-filter');
-    fireEvent.click(button);
-    expect(screen.getByRole('entity-menu')).toBeInTheDocument();
+    const selectButton = screen.getByTestId('select-button-filter');
+    fireEvent.click(selectButton);
 
-    fireEvent.click(button);
-    expect(screen.getByTestId('entity-menu').getAttribute('aria-hidden'))
-      .toBeNull();
+    const entityMenu = screen.getByRole('menu');
+    expect(entityMenu).toBeInTheDocument();
+
+    fireEvent.click(selectButton);
+    expect(entityMenu.getAttribute('aria-hidden')).toBeNull();
   });
 
   it('should call getSelectValue and dispatch selectItems on item click',
@@ -60,10 +64,10 @@ describe('SelectButtonFilter component', () => {
         'vehicles'];
 
       mockListOfEntities.forEach(entityItem => {
-        const button = screen.getByRole('select-button-filter');
-        fireEvent.click(button);
+        const selectButton = screen.getByTestId('select-button-filter');
+        fireEvent.click(selectButton);
 
-        const menuItem = screen.getByRole(entityItem);
+        const menuItem = screen.getByTestId(entityItem);
         fireEvent.click(menuItem);
 
         expect(props.getSelectValue).toHaveBeenCalledWith(entityItem);

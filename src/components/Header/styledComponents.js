@@ -1,12 +1,12 @@
-import { Box, Divider, styled } from '@mui/material';
+import { Divider, styled } from '@mui/material';
 import { AppBar } from '@mui/material';
 import theme from '../styles';
 
-export const StyledAppBar = styled(AppBar)({
+export const MuiAppBar = styled(AppBar)({
   backgroundColor: theme.palette.primary.light,
 });
 
-export const StyledDivider = styled(Divider)({
+export const MuiDivider = styled(Divider)({
   backgroundColor: theme.palette.yellow,
 });
 
