@@ -24,18 +24,21 @@ describe('EntityCard component', () => {
   it('should render EntityCard component', () => {
     renderWithMockStore(<EntityCard/>, { initialState });
 
-    expect(screen.getByRole('entity-card')).toBeInTheDocument();
+    const entityCard = screen.getByTestId('entity-card');
+    expect(entityCard).toBeInTheDocument();
   });
 
   it('should render EntityCardImage component', () => {
     renderWithMockStore(<EntityCard/>, { initialState });
 
-    expect(screen.getByRole('entity-card-image')).toBeInTheDocument();
+    const entityCardImage = screen.getByTestId('entity-card-image');
+    expect(entityCardImage).toBeInTheDocument();
   });
 
   it('should render EntityDescription component', () => {
     renderWithMockStore(<EntityCard/>, { initialState });
 
-    expect(screen.getByRole('entity-description')).toBeInTheDocument();
+    const entityDescription = screen.getByTestId('entity-description');
+    expect(entityDescription).toBeInTheDocument();
   });
 });

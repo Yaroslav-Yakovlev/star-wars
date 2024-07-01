@@ -17,13 +17,15 @@ describe('EntityDescription', () => {
   it('should render EntityDescription component', () => {
     render(<EntityDescription entityInfo={entityInfo} name={name}/>);
 
-    expect(screen.getByRole(('entity-description'))).toBeInTheDocument();
+    const entityDescription = screen.getByTestId('entity-description');
+    expect(entityDescription).toBeInTheDocument();
   });
 
   it('should render the name', () => {
     render(<EntityDescription entityInfo={entityInfo} name={name}/>);
 
-    expect(screen.getByText(name)).toBeInTheDocument();
+    const entityName = screen.getByRole('heading', { name: name })
+    expect(entityName).toBeInTheDocument();
   });
 
   it('should render all entity information', () => {
@@ -33,7 +35,7 @@ describe('EntityDescription', () => {
       if (key === 'entity') {
         expect(screen.queryByText(`${key}: ${value}`)).toBeNull();
       } else {
-        expect(screen.getByText(`${key}: ${value}`)).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: `${key}: ${value}`})).toBeInTheDocument();
       }
     });
   });
