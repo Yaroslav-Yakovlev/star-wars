@@ -22,7 +22,6 @@ const EntityCard = () => {
   return (
     <>
       <Box
-        role='entity-card'
         data-testid='entity-card'
         sx={{
           paddingBottom: '100px',

@@ -14,7 +14,7 @@ const EntityDescription = ({ entityInfo, name }) => {
 
   return (
     <Box
-      role='entity-description'
+      data-testid='entity-description'
       sx={{ color: theme.palette.text.light }}
     >
       <Typography marginLeft={1.5} variant="h4">{name}</Typography>

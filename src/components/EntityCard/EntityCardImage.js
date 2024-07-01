@@ -42,7 +42,7 @@ const EntityCardImage = ({ name, imageUrl, entityInfo }) => {
 
   return (
     <>
-      <Card role='entity-card-image'>
+      <Card data-testid='entity-card-image' >
         <Tooltip placement="top-end" title="Add to favorite">
           <CardActionArea
             onClick={isEntityAvailable ? handleAddToFavoriteList : null}
@@ -58,6 +58,7 @@ const EntityCardImage = ({ name, imageUrl, entityInfo }) => {
               onError={(e) => { e.target.src = fallBackImage;}}
             />
             {isEntityAvailable && <ImageListItemBar
+              data-testid='image-list-item-bar'
               sx={{
                 backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.4)' },
