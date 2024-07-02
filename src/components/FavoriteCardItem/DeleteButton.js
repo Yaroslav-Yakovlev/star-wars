@@ -23,6 +23,7 @@ const DeleteButton = ({ itemName, setIsVisibleFavoriteCardItem }) => {
 
   return (
     <Box
+      data-testid='delete-button'
       sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <IconButton
         sx={{ padding: '36px' }}

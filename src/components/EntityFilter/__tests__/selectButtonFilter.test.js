@@ -25,8 +25,11 @@ describe('SelectButtonFilter component', () => {
 
     store = mockStore(initialState);
 
-    const originalDispatch = store.dispatch;
-    store.dispatch = jest.fn(originalDispatch);
+    store.dispatch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render EntityMenu component', () => {
