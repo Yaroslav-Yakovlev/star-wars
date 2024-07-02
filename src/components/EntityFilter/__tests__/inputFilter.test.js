@@ -22,8 +22,11 @@ describe('InputFilter component', () => {
       setInputValue: jest.fn(),
     };
 
-    const originalDispatch = store.dispatch;
-    store.dispatch = jest.fn(originalDispatch);
+    store.dispatch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should have correct label text', () => {

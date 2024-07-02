@@ -35,8 +35,11 @@ describe('EntityCardImage', () => {
       },
     };
 
-    const originalDispatch = store.dispatch;
-    store.dispatch = jest.fn(originalDispatch);
+    store.dispatch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render EntityCardImage component with correct data', () => {

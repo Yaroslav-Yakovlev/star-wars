@@ -18,6 +18,7 @@ const FavoriteCardItem = ({ item, setIsVisibleFavoriteCardItem }) => {
 
   return (
     <Stack
+      data-testid='favorite-cart-item'
       direction={isMobile ? 'row' : 'column'}
       sx={{
         display: 'flex',

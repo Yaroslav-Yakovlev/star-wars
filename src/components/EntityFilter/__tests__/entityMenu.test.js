@@ -22,6 +22,10 @@ describe('EntityMenu component', () => {
     };
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should render EntityMenu component', () => {
     renderWithMockStore(<EntityMenu {...props} />, { initialState });
 

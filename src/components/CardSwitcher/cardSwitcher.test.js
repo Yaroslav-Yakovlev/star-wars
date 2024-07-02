@@ -11,6 +11,10 @@ describe('CardSwitcher component', () => {
     mockSwitchToPreviousCharacterById = jest.fn();
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
+
   it('should have next button and previous button', () => {
     render(<CardSwitcher/>);
 
