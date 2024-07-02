@@ -42,7 +42,7 @@ const EntityModal = ({ isModalOpen, handleModalClose }) => {
   return (
     <>
       <Dialog
-        role='entity-modal'
+        data-testid='entity-modal'
         open={isModalOpen}
         onClose={handleCloseFavoritesList}
         fullWidth

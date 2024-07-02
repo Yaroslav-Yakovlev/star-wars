@@ -31,7 +31,7 @@ describe('EntityMenu component', () => {
 
     const entityMenu = screen.getByRole('menu');
 
-    expect(entityMenu).toBeInTheDocument();
+    expect(entityMenu).toBeInTheDocument()
   });
 
   it('should render EntityMenu with list of entities', () => {
